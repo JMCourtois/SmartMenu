@@ -4,9 +4,11 @@ import type {
   ManagerRestaurantView,
   MenuCategoryView,
   MenuItemView,
+  MenuVersionView,
   RestaurantMenuView,
   RestaurantThemeView,
 } from "@/types/menu";
+import { getDemoDishImageUrl } from "@/lib/demo-dish-images";
 
 export const DEMO_RESTAURANT_ID = "demo-restaurant";
 export const DEMO_MENU_ID = "demo-menu";
@@ -1245,7 +1247,7 @@ function makeItem(
     isAvailable: item.isAvailable ?? true,
     isPromoted: item.isPromoted ?? false,
     sortOrder,
-    imageUrl: dishImagePath(restaurantSlug, item.slug),
+    imageUrl: getDemoDishImageUrl(restaurantSlug, item.slug) ?? dishImagePath(restaurantSlug, item.slug),
     translations: itemLocales.map((locale) => ({
       id: `${prefix}-${item.slug}-${locale}`,
       locale,
@@ -2787,6 +2789,8 @@ export const demoMenusBySlug = Object.fromEntries(
 
 export const demoPublishedMenu = demoMenusBySlug["demo-bavarian-wirtshaus"];
 
+export const DEMO_RESTAURANT_IDS = demoPublishedMenus.map((menu) => menu.restaurant.id);
+
 export const demoRestaurantCards = demoPublishedMenus.map((menu) => {
   const itemCount = menu.version.categories.reduce(
     (sum, category) => sum + category.items.length,
@@ -2806,40 +2810,57 @@ export const demoRestaurantCards = demoPublishedMenus.map((menu) => {
   };
 });
 
-export const demoManagerRestaurant: ManagerRestaurantView = {
-  ...demoPublishedMenu,
-  draftVersion: {
-    ...demoPublishedMenu.version,
-    id: DEMO_DRAFT_VERSION_ID,
+function makeDemoManagerRestaurant(menu: RestaurantMenuView): ManagerRestaurantView {
+  const draftVersionId =
+    menu.restaurant.id === DEMO_RESTAURANT_ID
+      ? DEMO_DRAFT_VERSION_ID
+      : `${menu.restaurant.id}-draft-v2`;
+
+  const draftVersion: MenuVersionView = {
+    ...menu.version,
+    id: draftVersionId,
     version: 2,
     status: "DRAFT",
     publishedAt: null,
     createdAt: new Date("2026-05-01T08:00:00.000Z").toISOString(),
-    categories: demoPublishedMenu.version.categories.map((category) => ({
+    categories: menu.version.categories.map((category) => ({
       ...category,
       items: category.items.map((item) =>
         item.id === "demo-restaurant-obatzda" ? { ...item, isPromoted: true } : item,
       ),
     })),
-  },
-  publishedVersion: demoPublishedMenu.version,
-  versions: [
-    {
-      id: DEMO_DRAFT_VERSION_ID,
-      version: 2,
-      status: "DRAFT",
-      publishedAt: null,
-      createdAt: new Date("2026-05-01T08:00:00.000Z").toISOString(),
-    },
-    {
-      id: DEMO_PUBLISHED_VERSION_ID,
-      version: 1,
-      status: "PUBLISHED",
-      publishedAt: new Date("2026-04-15T12:00:00.000Z").toISOString(),
-      createdAt: new Date("2026-04-15T10:00:00.000Z").toISOString(),
-    },
-  ],
-};
+  };
+
+  return {
+    ...menu,
+    draftVersion,
+    publishedVersion: menu.version,
+    versions: [
+      {
+        id: draftVersionId,
+        version: 2,
+        status: "DRAFT",
+        publishedAt: null,
+        createdAt: new Date("2026-05-01T08:00:00.000Z").toISOString(),
+      },
+      {
+        id: menu.version.id,
+        version: 1,
+        status: "PUBLISHED",
+        publishedAt: menu.version.publishedAt,
+        createdAt: menu.version.createdAt,
+      },
+    ],
+  };
+}
+
+export const demoManagerRestaurants = demoPublishedMenus.map(makeDemoManagerRestaurant);
+
+export const demoManagerRestaurantsById = Object.fromEntries(
+  demoManagerRestaurants.map((restaurant) => [restaurant.restaurant.id, restaurant]),
+) as Record<string, ManagerRestaurantView>;
+
+export const demoManagerRestaurant = demoManagerRestaurantsById[DEMO_RESTAURANT_ID];
 
 export const demoAiChangeSets: AiChangeSetView[] = [
   {

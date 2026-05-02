@@ -3,11 +3,12 @@ import { Prisma } from "@prisma/client";
 import {
   demoAnalyticsSummary,
   demoAiChangeSets,
-  demoManagerRestaurant,
+  demoManagerRestaurantsById,
   demoMenusBySlug,
   demoPublishedMenus,
   DEMO_DRAFT_VERSION_ID,
-  DEMO_RESTAURANT_ID,
+  DEMO_RESTAURANT_IDS,
+  DEMO_USER_ID,
 } from "@/lib/demo-data";
 import { getPrisma, hasDatabaseUrl } from "@/lib/db";
 import type {
@@ -200,7 +201,7 @@ export async function getMenuItemBySlug(restaurantSlug: string, itemSlug: string
 }
 
 export async function getDashboardRestaurants(userId: string) {
-  if (!hasDatabaseUrl()) {
+  if (!hasDatabaseUrl() || userId === DEMO_USER_ID) {
     return demoPublishedMenus.map((menu) => ({
       id: menu.restaurant.id,
       name: menu.restaurant.name,
@@ -233,8 +234,13 @@ export async function getDashboardRestaurants(userId: string) {
 export async function getManagerRestaurant(
   restaurantId: string,
 ): Promise<ManagerRestaurantView | null> {
+  const demoRestaurant = demoManagerRestaurantsById[restaurantId];
+  if (demoRestaurant) {
+    return demoRestaurant;
+  }
+
   if (!hasDatabaseUrl()) {
-    return restaurantId === DEMO_RESTAURANT_ID ? demoManagerRestaurant : null;
+    return null;
   }
 
   const prisma = getPrisma();
@@ -315,8 +321,18 @@ export async function getManagerRestaurant(
 export async function getAiChangeSets(
   menuVersionId: string,
 ): Promise<AiChangeSetView[]> {
-  if (!hasDatabaseUrl()) {
+  const demoDraftVersionIds = new Set(
+    Object.values(demoManagerRestaurantsById).map(
+      (restaurant) => restaurant.draftVersion.id,
+    ),
+  );
+
+  if (demoDraftVersionIds.has(menuVersionId)) {
     return menuVersionId === DEMO_DRAFT_VERSION_ID ? demoAiChangeSets : [];
+  }
+
+  if (!hasDatabaseUrl()) {
+    return [];
   }
 
   const prisma = getPrisma();
@@ -355,7 +371,7 @@ export async function getAiChangeSets(
 export async function getAnalyticsSummary(
   restaurantId: string,
 ): Promise<AnalyticsSummary> {
-  if (!hasDatabaseUrl()) {
+  if (!hasDatabaseUrl() || DEMO_RESTAURANT_IDS.includes(restaurantId)) {
     return demoAnalyticsSummary;
   }
 

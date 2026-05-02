@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-import { DEMO_RESTAURANT_ID, DEMO_USER_ID } from "@/lib/demo-data";
+import { DEMO_RESTAURANT_IDS, DEMO_USER_ID } from "@/lib/demo-data";
 import { getPrisma, hasDatabaseUrl } from "@/lib/db";
 import { can, type RestaurantAction } from "@/lib/permissions";
 
@@ -68,7 +68,7 @@ export async function requireRestaurantAccess(
 ) {
   const user = await requireUser();
 
-  if (user.isDemo && restaurantId === DEMO_RESTAURANT_ID) {
+  if (user.isDemo && DEMO_RESTAURANT_IDS.includes(restaurantId)) {
     return {
       user,
       role: "OWNER" as const,

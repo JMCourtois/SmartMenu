@@ -44,6 +44,10 @@ import {
   normalizeLocale,
   quickIntents,
 } from "@/lib/guest-menu";
+import {
+  getDemoMenuImageOverrides,
+  subscribeDemoImageOverrides,
+} from "@/lib/demo-image-overrides";
 import { readGuestPreferences, writeGuestPreferences } from "@/lib/guest-preferences";
 import { cn } from "@/lib/utils";
 import type { MenuDisplayMode, MenuItemView, RestaurantMenuView } from "@/types/menu";
@@ -97,28 +101,78 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
   });
   const [selectedItem, setSelectedItem] = useState<MenuItemView | null>(null);
   const [dishInfoOpen, setDishInfoOpen] = useState(false);
+  const [imageOverrides, setImageOverrides] = useState<Record<string, string>>({});
   const [conciergeSeed, setConciergeSeed] = useState<{
     id: number;
     question: string;
     focusItemId?: string;
   } | null>(null);
 
-  const allItems = useMemo(() => getAllMenuItems(menu), [menu]);
+  useEffect(() => {
+    let active = true;
+
+    async function loadImageOverrides() {
+      try {
+        const overrides = await getDemoMenuImageOverrides(menu.restaurant.slug);
+        if (active) {
+          setImageOverrides(overrides);
+        }
+      } catch {
+        if (active) {
+          setImageOverrides({});
+        }
+      }
+    }
+
+    loadImageOverrides();
+    const unsubscribe = subscribeDemoImageOverrides((detail) => {
+      if (!detail || detail.restaurantSlug === menu.restaurant.slug) {
+        loadImageOverrides();
+      }
+    });
+
+    return () => {
+      active = false;
+      unsubscribe();
+    };
+  }, [menu.restaurant.slug]);
+
+  const displayMenu = useMemo<RestaurantMenuView>(() => {
+    if (!Object.keys(imageOverrides).length) {
+      return menu;
+    }
+
+    return {
+      ...menu,
+      version: {
+        ...menu.version,
+        categories: menu.version.categories.map((category) => ({
+          ...category,
+          items: category.items.map((item) => ({
+            ...item,
+            imageUrl: imageOverrides[item.id] ?? item.imageUrl,
+          })),
+        })),
+      },
+    };
+  }, [imageOverrides, menu]);
+
+  const allItems = useMemo(() => getAllMenuItems(displayMenu), [displayMenu]);
   const copy = getGuestCopy(locale);
   const currentLocale = getLocaleOption(locale);
-  const restaurantCuisine = localizedRestaurantField(menu.restaurant, locale, "cuisine");
-  const restaurantDescription = localizedRestaurantField(menu.restaurant, locale, "description");
-  const restaurantLegalNotice = localizedRestaurantField(menu.restaurant, locale, "legalNotice");
+  const restaurantCuisine = localizedRestaurantField(displayMenu.restaurant, locale, "cuisine");
+  const restaurantDescription = localizedRestaurantField(displayMenu.restaurant, locale, "description");
+  const restaurantLegalNotice = localizedRestaurantField(displayMenu.restaurant, locale, "legalNotice");
 
   const filteredCategories = useMemo(
     () =>
       filterMenuCategories({
-        categories: menu.version.categories,
+        categories: displayMenu.version.categories,
         query,
         intent,
         locale,
       }),
-    [intent, locale, menu.version.categories, query],
+    [intent, locale, displayMenu.version.categories, query],
   );
 
   const visibleItems = useMemo(
@@ -135,6 +189,14 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
       }),
     [allItems, intent],
   );
+
+  const selectedDisplayItem = useMemo(() => {
+    if (!selectedItem) {
+      return null;
+    }
+
+    return allItems.find((item) => item.id === selectedItem.id) ?? selectedItem;
+  }, [allItems, selectedItem]);
 
   async function track(eventType: string, metadata?: Record<string, unknown>) {
     const sessionIdHash = await getSessionIdHash();
@@ -404,7 +466,7 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
           {viewMode === "photo" ? (
             <PhotoMenuView
               categories={filteredCategories}
-              menu={menu}
+              menu={displayMenu}
               locale={locale}
               onTrack={track}
               onSelectItem={openDishInfo}
@@ -413,7 +475,7 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
           ) : (
             <ClassicMenuView
               categories={filteredCategories}
-              menu={menu}
+              menu={displayMenu}
               locale={locale}
               onTrack={track}
               onSelectItem={openDishInfo}
@@ -479,8 +541,8 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
       </div>
 
       <DishInfoDialog
-        item={selectedItem}
-        menu={menu}
+        item={selectedDisplayItem}
+        menu={displayMenu}
         locale={locale}
         open={dishInfoOpen}
         onOpenChange={setDishInfoOpen}
@@ -488,7 +550,7 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
       />
 
       <AiConciergeWidget
-        menu={menu}
+        menu={displayMenu}
         locale={locale}
         visibleItems={visibleItems}
         seedRequest={conciergeSeed}

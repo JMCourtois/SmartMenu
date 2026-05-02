@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { ArrowLeft, BadgeCheck, Flame, Info, ShieldAlert, Soup, Utensils } from "lucide-react";
 
 import { MenuTagBadge } from "@/components/guest/MenuTagVisual";
+import { DemoAwareMenuItemImage } from "@/components/menu/DemoAwareMenuItemImage";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -65,10 +66,13 @@ export default async function GuestMenuItemPage({
         </Link>
 
         <Card className="overflow-hidden border-0 shadow-sm ring-1 ring-black/5">
-          {item.imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={item.imageUrl} alt="" className="h-72 w-full object-cover" />
-          ) : null}
+          <DemoAwareMenuItemImage
+            restaurantSlug={menu.restaurant.slug}
+            itemId={item.id}
+            itemName={localizedName(item, locale)}
+            fallbackUrl={item.imageUrl}
+            className="h-72 w-full"
+          />
           <CardHeader>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>

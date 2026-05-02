@@ -4,7 +4,7 @@ import { BarChart3, BookOpen, Camera, ChefHat, ExternalLink, QrCode, Sparkles } 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { DEMO_RESTAURANT_ID, demoRestaurantCards } from "@/lib/demo-data";
+import { demoRestaurantCards } from "@/lib/demo-data";
 
 export default function Home() {
   return (
@@ -30,7 +30,7 @@ export default function Home() {
                   Open guest showcase
                 </Button>
               </Link>
-              <Link href={`/dashboard/restaurants/${DEMO_RESTAURANT_ID}/menu`}>
+              <Link href={`/dashboard/restaurants/${demoRestaurantCards[0].id}/menu`}>
                 <Button variant="outline">
                   <ExternalLink data-icon="inline-start" />
                   Open manager demo
@@ -127,7 +127,7 @@ export default function Home() {
                         {restaurant.description}
                       </CardDescription>
                     </div>
-                    <div className="mt-auto grid gap-2 sm:grid-cols-2">
+                    <div className="mt-auto grid gap-2 sm:grid-cols-3">
                       <Link href={`/r/${restaurant.slug}?view=photo`}>
                         <Button className="w-full" style={{ backgroundColor: restaurant.theme.accent, color: "white" }}>
                           <Camera data-icon="inline-start" />
@@ -138,6 +138,12 @@ export default function Home() {
                         <Button variant="outline" className="w-full">
                           <BookOpen data-icon="inline-start" />
                           Real menu
+                        </Button>
+                      </Link>
+                      <Link href={`/dashboard/restaurants/${restaurant.id}/menu`}>
+                        <Button variant="secondary" className="w-full">
+                          <ExternalLink data-icon="inline-start" />
+                          Edit demo
                         </Button>
                       </Link>
                     </div>

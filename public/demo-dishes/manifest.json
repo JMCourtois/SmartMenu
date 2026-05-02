@@ -1,0 +1,659 @@
+{
+  "generatedAt": "2026-05-02T15:24:47.990Z",
+  "mode": "dry-run",
+  "model": "gpt-image-2",
+  "size": "1536x1024",
+  "quality": "high",
+  "outputFormat": "webp",
+  "outputCompression": 85,
+  "items": [
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "schweinshaxe",
+      "dishName": "Schweinshaxe",
+      "category": "Beer Hall Classics",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/schweinshaxe.webp",
+      "promptSummary": "Realistic restaurant food photography of Schweinshaxe. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer Hall Classics. Dish context: A celebratory beer-hall roast. It is heavy, savory, and best when you want the"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "kaesespaetzle",
+      "dishName": "Käsespätzle",
+      "category": "Beer Hall Classics",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/kaesespaetzle.webp",
+      "promptSummary": "Realistic restaurant food photography of Käsespätzle. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer Hall Classics. Dish context: Think of it as Alpine macaroni and cheese, but with tender handmade noodles. Or"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "obatzda",
+      "dishName": "Obatzda",
+      "category": "Beer Hall Classics",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/obatzda.webp",
+      "promptSummary": "Realistic restaurant food photography of Obatzda. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer Hall Classics. Dish context: A traditional beer snack meant for sharing before heavier mains arrive. Origin or c"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "nuernberger-rostbratwuerstl",
+      "dishName": "Nürnberger Rostbratwürstl",
+      "category": "Beer Hall Classics",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/nuernberger-rostbratwuerstl.webp",
+      "promptSummary": "Realistic restaurant food photography of Nürnberger Rostbratwürstl. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer Hall Classics. Dish context: These are smaller and more aromatic than standard sausages becaus"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "forelle-muellerin",
+      "dishName": "Forelle Müllerin",
+      "category": "Fresh, Fish & Garden",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/forelle-muellerin.webp",
+      "promptSummary": "Realistic restaurant food photography of Forelle Müllerin. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Fresh, Fish & Garden. Dish context: A good lighter choice if you want Bavarian flavors without a heavy roast"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "rahmschwammerl",
+      "dishName": "Rahmschwammerl",
+      "category": "Fresh, Fish & Garden",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/rahmschwammerl.webp",
+      "promptSummary": "Realistic restaurant food photography of Rahmschwammerl. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Fresh, Fish & Garden. Dish context: A vegetarian tavern dish where the dumpling soaks up a rich mushroom sauce"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "spargelsalat",
+      "dishName": "Spargelsalat",
+      "category": "Fresh, Fish & Garden",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/spargelsalat.webp",
+      "promptSummary": "Realistic restaurant food photography of Spargelsalat. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Fresh, Fish & Garden. Dish context: White asparagus is a seasonal German favorite with a subtle, elegant taste. "
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "rote-bete-knoedel",
+      "dishName": "Rote-Bete-Knödel",
+      "category": "Fresh, Fish & Garden",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/rote-bete-knoedel.webp",
+      "promptSummary": "Realistic restaurant food photography of Rote-Bete-Knödel. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Fresh, Fish & Garden. Dish context: A colorful modern Bavarian dish that gives dumplings a brighter vegetabl"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "leberknoedelsuppe",
+      "dishName": "Leberknödelsuppe",
+      "category": "Soups, Sides & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/leberknoedelsuppe.webp",
+      "promptSummary": "Realistic restaurant food photography of Leberknödelsuppe. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Soups, Sides & Sweet Finish. Dish context: A warming soup with a dumpling made from liver and bread; loved b"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "kartoffelknoedel",
+      "dishName": "Kartoffelknödel",
+      "category": "Soups, Sides & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/kartoffelknoedel.webp",
+      "promptSummary": "Realistic restaurant food photography of Kartoffelknödel. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Soups, Sides & Sweet Finish. Dish context: Not a main dish for most guests, but the best side for roasts and "
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "apfelstrudel",
+      "dishName": "Apfelstrudel",
+      "category": "Soups, Sides & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/apfelstrudel.webp",
+      "promptSummary": "Realistic restaurant food photography of Apfelstrudel. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Soups, Sides & Sweet Finish. Dish context: A familiar dessert for many travelers, but here it is softer and more"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "kaiserschmarrn",
+      "dishName": "Kaiserschmarrn",
+      "category": "Soups, Sides & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/kaiserschmarrn.webp",
+      "promptSummary": "Realistic restaurant food photography of Kaiserschmarrn. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Soups, Sides & Sweet Finish. Dish context: A dessert that eats like a warm, shredded pancake. Great to share. "
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "munich-helles",
+      "dishName": "Munich Helles",
+      "category": "Beer, Spritz & Pairing Plates",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/munich-helles.webp",
+      "promptSummary": "Realistic restaurant food photography of Munich Helles. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer, Spritz & Pairing Plates. Dish context: The default Munich beer style; easy with roasts, sausage, and chee"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "weissbier",
+      "dishName": "Weissbier",
+      "category": "Beer, Spritz & Pairing Plates",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/weissbier.webp",
+      "promptSummary": "Realistic restaurant food photography of Weissbier. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer, Spritz & Pairing Plates. Dish context: A classic with pretzels, cheese spread, and lighter garden dishes. Ori"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "almdudler-spritz",
+      "dishName": "Almdudler Spritz",
+      "category": "Beer, Spritz & Pairing Plates",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/almdudler-spritz.webp",
+      "promptSummary": "Realistic restaurant food photography of Almdudler Spritz. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer, Spritz & Pairing Plates. Dish context: A non-alcoholic pairing for guests who want beer-garden freshne"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "brotzeit-board",
+      "dishName": "Brotzeit Board",
+      "category": "Beer, Spritz & Pairing Plates",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/brotzeit-board.webp",
+      "promptSummary": "Realistic restaurant food photography of Brotzeit Board. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer, Spritz & Pairing Plates. Dish context: Brotzeit means bread-time: a casual board built around beer and c"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "radler",
+      "dishName": "Radler",
+      "category": "Beer, Spritz & Pairing Plates",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/radler.webp",
+      "promptSummary": "Realistic restaurant food photography of Radler. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer, Spritz & Pairing Plates. Dish context: A lower-alcohol beer option for guests who want something refreshing. Ori"
+    },
+    {
+      "restaurantSlug": "demo-bavarian-wirtshaus",
+      "itemSlug": "espresso-schnapserl",
+      "dishName": "Espresso & Schnapserl",
+      "category": "Beer, Spritz & Pairing Plates",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-bavarian-wirtshaus/espresso-schnapserl.webp",
+      "promptSummary": "Realistic restaurant food photography of Espresso & Schnapserl. Restaurant concept: Demo Bavarian Wirtshaus, Bayerisches Wirtshaus in Munich. Menu category: Beer, Spritz & Pairing Plates. Dish context: A compact way to end a heavy Bavarian meal. Origin or cult"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "korean-kimchi-pancake",
+      "dishName": "Korean Kimchi Pancake",
+      "category": "Small Plates & Street Snacks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/korean-kimchi-pancake.webp",
+      "promptSummary": "Realistic restaurant food photography of Korean Kimchi Pancake. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Small Plates & Street Snacks. Dish context: A shareable savory pancake; choose it if you like fermented "
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "chicken-karaage",
+      "dishName": "Chicken Karaage",
+      "category": "Small Plates & Street Snacks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/chicken-karaage.webp",
+      "promptSummary": "Realistic restaurant food photography of Chicken Karaage. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Small Plates & Street Snacks. Dish context: A very approachable choice: boneless fried chicken with Japanese s"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "sichuan-cucumber-smash",
+      "dishName": "Sichuan Cucumber Smash",
+      "category": "Small Plates & Street Snacks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/sichuan-cucumber-smash.webp",
+      "promptSummary": "Realistic restaurant food photography of Sichuan Cucumber Smash. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Small Plates & Street Snacks. Dish context: Refreshing but punchy; good as a cooling side next to noodl"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "prawn-toast-bites",
+      "dishName": "Prawn Toast Bites",
+      "category": "Small Plates & Street Snacks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/prawn-toast-bites.webp",
+      "promptSummary": "Realistic restaurant food photography of Prawn Toast Bites. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Small Plates & Street Snacks. Dish context: A nostalgic fried snack; richer than it looks because the prawn "
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "pad-thai-tamarind-noodles",
+      "dishName": "Pad Thai Tamarind Noodles",
+      "category": "Noodles, Rice & Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/pad-thai-tamarind-noodles.webp",
+      "promptSummary": "Realistic restaurant food photography of Pad Thai Tamarind Noodles. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Noodles, Rice & Bowls. Dish context: One of the easiest Thai dishes to love: balanced, tangy, and no"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "tokyo-shoyu-ramen",
+      "dishName": "Tokyo Shoyu Ramen",
+      "category": "Noodles, Rice & Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/tokyo-shoyu-ramen.webp",
+      "promptSummary": "Realistic restaurant food photography of Tokyo Shoyu Ramen. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Noodles, Rice & Bowls. Dish context: A lighter ramen than creamy tonkotsu; the main flavor is soy-seasoned b"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "singapore-laksa",
+      "dishName": "Singapore Laksa",
+      "category": "Noodles, Rice & Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/singapore-laksa.webp",
+      "promptSummary": "Realistic restaurant food photography of Singapore Laksa. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Noodles, Rice & Bowls. Dish context: A bowl for guests who want fragrant curry flavor without choosing a dry s"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "mushroom-bibimbap",
+      "dishName": "Mushroom Bibimbap",
+      "category": "Noodles, Rice & Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/mushroom-bibimbap.webp",
+      "promptSummary": "Realistic restaurant food photography of Mushroom Bibimbap. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Noodles, Rice & Bowls. Dish context: Bibimbap means mixed rice. Stir everything together for the intended te"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "thai-green-curry-chicken",
+      "dishName": "Thai Green Curry Chicken",
+      "category": "Grill, Curry & Wok",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/thai-green-curry-chicken.webp",
+      "promptSummary": "Realistic restaurant food photography of Thai Green Curry Chicken. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Grill, Curry & Wok. Dish context: Green curry is aromatic rather than smoky; basil and lime leaf make"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "char-siu-eggplant",
+      "dishName": "Char Siu Eggplant",
+      "category": "Grill, Curry & Wok",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/char-siu-eggplant.webp",
+      "promptSummary": "Realistic restaurant food photography of Char Siu Eggplant. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Grill, Curry & Wok. Dish context: This has the shiny barbecue flavor of char siu without pork; great for a v"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "miso-black-cod",
+      "dishName": "Miso Black Cod",
+      "category": "Grill, Curry & Wok",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/miso-black-cod.webp",
+      "promptSummary": "Realistic restaurant food photography of Miso Black Cod. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Grill, Curry & Wok. Dish context: A silky, luxurious fish dish; less salty than it sounds because the cod is ri"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "sichuan-mapo-tofu",
+      "dishName": "Sichuan Mapo Tofu",
+      "category": "Grill, Curry & Wok",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/sichuan-mapo-tofu.webp",
+      "promptSummary": "Realistic restaurant food photography of Sichuan Mapo Tofu. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Grill, Curry & Wok. Dish context: The signature sensation is mala: chili heat plus a tingling feeling from S"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "satay-chicken-skewers",
+      "dishName": "Satay Chicken Skewers",
+      "category": "Skewers, Sweets & Drinks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/satay-chicken-skewers.webp",
+      "promptSummary": "Realistic restaurant food photography of Satay Chicken Skewers. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Skewers, Sweets & Drinks. Dish context: A safe first order if you like grilled chicken and peanut sauce."
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "thai-mango-sticky-rice",
+      "dishName": "Thai Mango Sticky Rice",
+      "category": "Skewers, Sweets & Drinks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/thai-mango-sticky-rice.webp",
+      "promptSummary": "Realistic restaurant food photography of Thai Mango Sticky Rice. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Skewers, Sweets & Drinks. Dish context: A beloved Thai dessert; simple, fruity, and naturally rich. Ori"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "matcha-cheesecake",
+      "dishName": "Matcha Cheesecake",
+      "category": "Skewers, Sweets & Drinks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/matcha-cheesecake.webp",
+      "promptSummary": "Realistic restaurant food photography of Matcha Cheesecake. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Skewers, Sweets & Drinks. Dish context: Matcha adds a pleasantly bitter tea note that keeps the cake from fe"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "yuzu-lemonade",
+      "dishName": "Yuzu Lemonade",
+      "category": "Skewers, Sweets & Drinks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/yuzu-lemonade.webp",
+      "promptSummary": "Realistic restaurant food photography of Yuzu Lemonade. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Skewers, Sweets & Drinks. Dish context: Yuzu tastes like lemon, mandarin, and grapefruit all at once. Origin or "
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "oolong-highball",
+      "dishName": "Oolong Highball",
+      "category": "Skewers, Sweets & Drinks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/oolong-highball.webp",
+      "promptSummary": "Realistic restaurant food photography of Oolong Highball. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Skewers, Sweets & Drinks. Dish context: A dry cocktail for guests who do not want sweetness. Origin or cultura"
+    },
+    {
+      "restaurantSlug": "demo-asian-night-market",
+      "itemSlug": "sesame-mochi-trio",
+      "dishName": "Sesame Mochi Trio",
+      "category": "Skewers, Sweets & Drinks",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-asian-night-market/sesame-mochi-trio.webp",
+      "promptSummary": "Realistic restaurant food photography of Sesame Mochi Trio. Restaurant concept: Pan-Asian Night Market, Pan-Asian street food in Berlin. Menu category: Skewers, Sweets & Drinks. Dish context: Mochi is about texture: soft, chewy rice dough around a sweet center"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "goi-cuon-tom",
+      "dishName": "Gỏi Cuốn Tôm",
+      "category": "Fresh Rolls & Herbs",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/goi-cuon-tom.webp",
+      "promptSummary": "Realistic restaurant food photography of Gỏi Cuốn Tôm. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Fresh Rolls & Herbs. Dish context: These are not fried spring rolls; they are cool, soft, and very herb-forward. Or"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "banh-xeo",
+      "dishName": "Bánh Xèo",
+      "category": "Fresh Rolls & Herbs",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/banh-xeo.webp",
+      "promptSummary": "Realistic restaurant food photography of Bánh Xèo. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Fresh Rolls & Herbs. Dish context: You wrap pieces in lettuce and herbs, then dip. It is crunchy and interactive. Origi"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "green-papaya-salad",
+      "dishName": "Green Papaya Salad",
+      "category": "Fresh Rolls & Herbs",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/green-papaya-salad.webp",
+      "promptSummary": "Realistic restaurant food photography of Green Papaya Salad. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Fresh Rolls & Herbs. Dish context: Papaya here is unripe and crisp, closer to a vegetable than a sweet fruit."
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "crispy-tofu-lettuce-cups",
+      "dishName": "Crispy Tofu Lettuce Cups",
+      "category": "Fresh Rolls & Herbs",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/crispy-tofu-lettuce-cups.webp",
+      "promptSummary": "Realistic restaurant food photography of Crispy Tofu Lettuce Cups. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Fresh Rolls & Herbs. Dish context: A hands-on starter: build a lettuce wrap and add sauce to your spice"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "pho-bo-tai",
+      "dishName": "Phở Bò Tái",
+      "category": "Phở, Bún & Broths",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/pho-bo-tai.webp",
+      "promptSummary": "Realistic restaurant food photography of Phở Bò Tái. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Phở, Bún & Broths. Dish context: Phở is mostly about broth aroma. Add herbs and lime gradually so you can taste the b"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "bun-cha-ha-noi",
+      "dishName": "Bún Chả Hà Nội",
+      "category": "Phở, Bún & Broths",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/bun-cha-ha-noi.webp",
+      "promptSummary": "Realistic restaurant food photography of Bún Chả Hà Nội. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Phở, Bún & Broths. Dish context: Dip noodles and herbs into the warm pork broth; it is not a soup bowl, more a di"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "bun-bo-hue",
+      "dishName": "Bún Bò Huế",
+      "category": "Phở, Bún & Broths",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/bun-bo-hue.webp",
+      "promptSummary": "Realistic restaurant food photography of Bún Bò Huế. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Phở, Bún & Broths. Dish context: Choose this if you want a deeper, spicier soup than phở with lots of lemongrass arom"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "vegan-pho-nam",
+      "dishName": "Vegan Phở Nấm",
+      "category": "Phở, Bún & Broths",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/vegan-pho-nam.webp",
+      "promptSummary": "Realistic restaurant food photography of Vegan Phở Nấm. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Phở, Bún & Broths. Dish context: A gentle, aromatic bowl for anyone who wants phở without meat or fish sauce. Orig"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "banh-mi-dac-biet",
+      "dishName": "Bánh Mì Đặc Biệt",
+      "category": "Grill, Rice & Bánh Mì",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/banh-mi-dac-biet.webp",
+      "promptSummary": "Realistic restaurant food photography of Bánh Mì Đặc Biệt. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Grill, Rice & Bánh Mì. Dish context: A sandwich with French bread and Vietnamese fillings; the pickles keep it "
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "com-tam-suon-nuong",
+      "dishName": "Cơm Tấm Sườn Nướng",
+      "category": "Grill, Rice & Bánh Mì",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/com-tam-suon-nuong.webp",
+      "promptSummary": "Realistic restaurant food photography of Cơm Tấm Sườn Nướng. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Grill, Rice & Bánh Mì. Dish context: Broken rice has a shorter, softer texture; it is perfect with grilled po"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "lemongrass-chicken-rice-bowl",
+      "dishName": "Lemongrass Chicken Rice Bowl",
+      "category": "Grill, Rice & Bánh Mì",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/lemongrass-chicken-rice-bowl.webp",
+      "promptSummary": "Realistic restaurant food photography of Lemongrass Chicken Rice Bowl. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Grill, Rice & Bánh Mì. Dish context: A reliable first order if you want grilled protein, rice, and "
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "caramelized-claypot-eggplant",
+      "dishName": "Caramelized Claypot Eggplant",
+      "category": "Grill, Rice & Bánh Mì",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/caramelized-claypot-eggplant.webp",
+      "promptSummary": "Realistic restaurant food photography of Caramelized Claypot Eggplant. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Grill, Rice & Bánh Mì. Dish context: Vietnamese caramel sauce is savory, not dessert-like; it gives"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "ca-phe-sua-da",
+      "dishName": "Cà Phê Sữa Đá",
+      "category": "Coffee, Sweets & Side Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/ca-phe-sua-da.webp",
+      "promptSummary": "Realistic restaurant food photography of Cà Phê Sữa Đá. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Coffee, Sweets & Side Bowls. Dish context: A bold coffee drink that can feel almost dessert-like. Origin or cultur"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "che-ba-mau",
+      "dishName": "Chè Ba Màu",
+      "category": "Coffee, Sweets & Side Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/che-ba-mau.webp",
+      "promptSummary": "Realistic restaurant food photography of Chè Ba Màu. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Coffee, Sweets & Side Bowls. Dish context: Chè is a spoon dessert, somewhere between pudding, shaved ice, and sweet s"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "pandan-coconut-flan",
+      "dishName": "Pandan Coconut Flan",
+      "category": "Coffee, Sweets & Side Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/pandan-coconut-flan.webp",
+      "promptSummary": "Realistic restaurant food photography of Pandan Coconut Flan. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Coffee, Sweets & Side Bowls. Dish context: Pandan gives a vanilla-like green aroma common in Southeast Asian"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "pickled-lotus-root-side",
+      "dishName": "Pickled Lotus Root Side",
+      "category": "Coffee, Sweets & Side Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/pickled-lotus-root-side.webp",
+      "promptSummary": "Realistic restaurant food photography of Pickled Lotus Root Side. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Coffee, Sweets & Side Bowls. Dish context: A bright side to reset your palate between grilled and saucy "
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "coconut-lime-soda",
+      "dishName": "Coconut Lime Soda",
+      "category": "Coffee, Sweets & Side Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/coconut-lime-soda.webp",
+      "promptSummary": "Realistic restaurant food photography of Coconut Lime Soda. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Coffee, Sweets & Side Bowls. Dish context: A cooling non-alcoholic match for chili, herbs, and fish sauce. Ori"
+    },
+    {
+      "restaurantSlug": "demo-vietnamese-house",
+      "itemSlug": "extra-herb-basket",
+      "dishName": "Extra Herb Basket",
+      "category": "Coffee, Sweets & Side Bowls",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-vietnamese-house/extra-herb-basket.webp",
+      "promptSummary": "Realistic restaurant food photography of Extra Herb Basket. Restaurant concept: Vietnamese House, Vietnamese house kitchen in Hamburg. Menu category: Coffee, Sweets & Side Bowls. Dish context: Use this to customize phở and noodle bowls bite by bite. Origin or "
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "papdi-chaat",
+      "dishName": "Papdi Chaat",
+      "category": "Chaat, Tandoor & Starters",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/papdi-chaat.webp",
+      "promptSummary": "Realistic restaurant food photography of Papdi Chaat. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Chaat, Tandoor & Starters. Dish context: Chaat is about contrast: crunch, yogurt, chutneys, herbs, and a sweet-sour finish"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "paneer-tikka",
+      "dishName": "Paneer Tikka",
+      "category": "Chaat, Tandoor & Starters",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/paneer-tikka.webp",
+      "promptSummary": "Realistic restaurant food photography of Paneer Tikka. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Chaat, Tandoor & Starters. Dish context: Paneer is a firm fresh cheese. This is a vegetarian grill dish, not a curry. Ori"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "amritsari-fish-fry",
+      "dishName": "Amritsari Fish Fry",
+      "category": "Chaat, Tandoor & Starters",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/amritsari-fish-fry.webp",
+      "promptSummary": "Realistic restaurant food photography of Amritsari Fish Fry. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Chaat, Tandoor & Starters. Dish context: A fragrant fried fish starter; gram flour gives a nutty crust without whea"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "masala-dosa",
+      "dishName": "Masala Dosa",
+      "category": "Chaat, Tandoor & Starters",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/masala-dosa.webp",
+      "promptSummary": "Realistic restaurant food photography of Masala Dosa. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Chaat, Tandoor & Starters. Dish context: Dosa is a large crisp crepe. Tear it by hand and dip into sambar and chutneys. Or"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "butter-chicken",
+      "dishName": "Butter Chicken",
+      "category": "Curries & Regional Mains",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/butter-chicken.webp",
+      "promptSummary": "Realistic restaurant food photography of Butter Chicken. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Curries & Regional Mains. Dish context: A gentle first curry if you want creamy tomato sauce and mild spice. Origin or "
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "lamb-rogan-josh",
+      "dishName": "Lamb Rogan Josh",
+      "category": "Curries & Regional Mains",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/lamb-rogan-josh.webp",
+      "promptSummary": "Realistic restaurant food photography of Lamb Rogan Josh. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Curries & Regional Mains. Dish context: The red color looks fiery, but Kashmiri chili is more aromatic than aggressive"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "goan-prawn-curry",
+      "dishName": "Goan Prawn Curry",
+      "category": "Curries & Regional Mains",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/goan-prawn-curry.webp",
+      "promptSummary": "Realistic restaurant food photography of Goan Prawn Curry. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Curries & Regional Mains. Dish context: A coastal curry: brighter and tangier than creamy northern curries. Origin or"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "baingan-bharta",
+      "dishName": "Baingan Bharta",
+      "category": "Curries & Regional Mains",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/baingan-bharta.webp",
+      "promptSummary": "Realistic restaurant food photography of Baingan Bharta. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Curries & Regional Mains. Dish context: A smoky vegetable main; the texture is soft like a warm eggplant spread. Origin"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "hyderabadi-chicken-biryani",
+      "dishName": "Hyderabadi Chicken Biryani",
+      "category": "Rice, Bread & Sweets",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/hyderabadi-chicken-biryani.webp",
+      "promptSummary": "Realistic restaurant food photography of Hyderabadi Chicken Biryani. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Rice, Bread & Sweets. Dish context: Biryani is not curry with rice; the rice itself carries the aroma and s"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "garlic-naan",
+      "dishName": "Garlic Naan",
+      "category": "Rice, Bread & Sweets",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/garlic-naan.webp",
+      "promptSummary": "Realistic restaurant food photography of Garlic Naan. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Rice, Bread & Sweets. Dish context: The best bread for creamy curries. Tear pieces and use them to scoop sauce. Origin or "
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "mango-kulfi",
+      "dishName": "Mango Kulfi",
+      "category": "Rice, Bread & Sweets",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/mango-kulfi.webp",
+      "promptSummary": "Realistic restaurant food photography of Mango Kulfi. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Rice, Bread & Sweets. Dish context: Kulfi is denser than gelato because it is made from reduced milk, not churned airy cre"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "gulab-jamun",
+      "dishName": "Gulab Jamun",
+      "category": "Rice, Bread & Sweets",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/gulab-jamun.webp",
+      "promptSummary": "Realistic restaurant food photography of Gulab Jamun. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Rice, Bread & Sweets. Dish context: A small dessert that is richer and sweeter than it looks; best after a spicy meal. Ori"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "peshwari-naan",
+      "dishName": "Peshwari Naan",
+      "category": "Bread, Lassi & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/peshwari-naan.webp",
+      "promptSummary": "Realistic restaurant food photography of Peshwari Naan. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Bread, Lassi & Sweet Finish. Dish context: A sweet bread that pairs best with spicy curries, not usually as dessert. Ori"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "tandoori-roti",
+      "dishName": "Tandoori Roti",
+      "category": "Bread, Lassi & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/tandoori-roti.webp",
+      "promptSummary": "Realistic restaurant food photography of Tandoori Roti. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Bread, Lassi & Sweet Finish. Dish context: Choose roti if you want bread that is lighter and less buttery than naan. Ori"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "mango-lassi",
+      "dishName": "Mango Lassi",
+      "category": "Bread, Lassi & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/mango-lassi.webp",
+      "promptSummary": "Realistic restaurant food photography of Mango Lassi. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Bread, Lassi & Sweet Finish. Dish context: The classic drink to cool chili and tandoor spices. Origin or cultural context:"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "salted-nimbu-soda",
+      "dishName": "Salted Nimbu Soda",
+      "category": "Bread, Lassi & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/salted-nimbu-soda.webp",
+      "promptSummary": "Realistic restaurant food photography of Salted Nimbu Soda. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Bread, Lassi & Sweet Finish. Dish context: More savory than lemonade; great with fried snacks and chaat. Origin or c"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "cardamom-rice-pudding",
+      "dishName": "Cardamom Rice Pudding",
+      "category": "Bread, Lassi & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/cardamom-rice-pudding.webp",
+      "promptSummary": "Realistic restaurant food photography of Cardamom Rice Pudding. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Bread, Lassi & Sweet Finish. Dish context: A softer dessert than gulab jamun, with perfume-like spice notes. Ori"
+    },
+    {
+      "restaurantSlug": "demo-indian-spice-room",
+      "itemSlug": "masala-chai",
+      "dishName": "Masala Chai",
+      "category": "Bread, Lassi & Sweet Finish",
+      "model": "gpt-image-2",
+      "path": "/demo-dishes/demo-indian-spice-room/masala-chai.webp",
+      "promptSummary": "Realistic restaurant food photography of Masala Chai. Restaurant concept: Indian Spice Room, Indian spice room in Cologne. Menu category: Bread, Lassi & Sweet Finish. Dish context: A comforting finish and the best companion for sweet desserts. Origin or cultur"
+    }
+  ]
+}

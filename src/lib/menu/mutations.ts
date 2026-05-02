@@ -1,6 +1,13 @@
 import { Prisma } from "@prisma/client";
+import { put } from "@vercel/blob";
 
 import { getPrisma } from "@/lib/db";
+import {
+  isAllowedMenuItemImageType,
+  MAX_MENU_ITEM_IMAGE_SIZE,
+  menuItemBlobPath,
+  sanitizeMenuItemImageFileName,
+} from "@/lib/menu/images";
 import { slugify } from "@/lib/menu/slug";
 import {
   MenuCategoryFormSchema,
@@ -172,4 +179,119 @@ export async function upsertMenuItemTranslation({
 
     return translation;
   });
+}
+
+export async function updateMenuItemImage({
+  restaurantId,
+  formData,
+  actorUserId,
+}: {
+  restaurantId: string;
+  formData: FormData;
+  actorUserId: string;
+}) {
+  const menuItemId = String(formData.get("menuItemId") ?? "").trim();
+  const image = formData.get("image");
+
+  if (!menuItemId) {
+    throw new Error("Menu item is required.");
+  }
+
+  if (!(image instanceof File) || image.size === 0) {
+    throw new Error("Choose an image file.");
+  }
+
+  if (!isAllowedMenuItemImageType(image.type)) {
+    throw new Error("Use a JPEG, PNG, WebP, or AVIF image.");
+  }
+
+  if (image.size > MAX_MENU_ITEM_IMAGE_SIZE) {
+    throw new Error("Images must be 8MB or smaller.");
+  }
+
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    throw new Error("BLOB_READ_WRITE_TOKEN is required to store menu images.");
+  }
+
+  const prisma = getPrisma();
+  const item = await prisma.menuItem.findFirst({
+    where: {
+      id: menuItemId,
+      category: {
+        menuVersion: {
+          status: "DRAFT",
+          menu: {
+            restaurantId,
+          },
+        },
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      imageUrl: true,
+      category: {
+        select: {
+          menuVersion: {
+            select: {
+              id: true,
+              menu: {
+                select: {
+                  restaurant: {
+                    select: {
+                      slug: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!item) {
+    throw new Error("Draft menu item not found for this restaurant.");
+  }
+
+  const safeFileName = sanitizeMenuItemImageFileName(image.name, image.type);
+  const pathname = menuItemBlobPath({
+    restaurantId,
+    menuItemId,
+    fileName: safeFileName,
+  });
+
+  const blob = await put(pathname, image, {
+    access: "public",
+    contentType: image.type,
+  });
+
+  await prisma.$transaction(async (tx) => {
+    await tx.menuItem.update({
+      where: { id: item.id },
+      data: { imageUrl: blob.url },
+    });
+
+    await tx.auditLog.create({
+      data: {
+        actorUserId,
+        action: "UPDATE_MENU_ITEM_IMAGE",
+        entityType: "MenuItem",
+        entityId: item.id,
+        metadata: {
+          menuVersionId: item.category.menuVersion.id,
+          previousImageUrl: item.imageUrl,
+          imageUrl: blob.url,
+          contentType: image.type,
+          size: image.size,
+        },
+      },
+    });
+  });
+
+  return {
+    imageUrl: blob.url,
+    restaurantSlug: item.category.menuVersion.menu.restaurant.slug,
+  };
 }

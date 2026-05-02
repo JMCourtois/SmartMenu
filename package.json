@@ -12,7 +12,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
-    "db:seed": "tsx scripts/seed.ts"
+    "db:seed": "tsx scripts/seed.ts",
+    "generate:demo-images": "tsx scripts/generate-demo-dish-images.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",

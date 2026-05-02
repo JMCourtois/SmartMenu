@@ -19,8 +19,11 @@ import {
   restoreVersionAction,
   upsertTranslationAction,
 } from "@/app/(manager)/dashboard/actions";
+import { MenuItemImageOpenButton } from "@/components/dashboard/MenuItemImageOpenButton";
+import { MenuItemImageUploadForm } from "@/components/dashboard/MenuItemImageUploadForm";
 import { ManagerPageHeader } from "@/components/dashboard/ManagerPageHeader";
 import { ManagerStatusCard } from "@/components/dashboard/ManagerStatusCard";
+import { DemoAwareMenuItemImage } from "@/components/menu/DemoAwareMenuItemImage";
 import { QuickActionPanel } from "@/components/dashboard/QuickActionPanel";
 import { SetupChecklist } from "@/components/dashboard/SetupChecklist";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -162,42 +165,65 @@ export default async function MenuManagerPage({
               <CardContent className="flex flex-col gap-3">
                 {category.items.map((item) => (
                   <div key={item.id} className="rounded-xl border bg-slate-50/70 p-3">
-                    <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                      <div className="min-w-0">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="font-medium">{item.name}</h3>
-                          {item.isPromoted ? (
-                            <Badge className="border-0 bg-violet-100 text-violet-900">Promoted</Badge>
-                          ) : null}
-                          {!item.isAvailable ? (
-                            <Badge variant="destructive">Sold out</Badge>
-                          ) : null}
-                        </div>
-                        <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-                          {item.description}
-                        </p>
-                        <div className="mt-3 flex flex-wrap gap-1.5">
-                          <Badge variant="outline">
-                            EN {item.translations.some((entry) => entry.locale === "en") ? "ready" : "missing"}
-                          </Badge>
-                          {item.allergens.map((allergen) => (
-                            <Badge
-                              key={allergen.code}
-                              variant={
-                                allergen.verificationStatus === "VERIFIED"
-                                  ? "outline"
-                                  : "destructive"
-                              }
-                            >
-                              {allergen.name}: {allergen.status.replaceAll("_", " ")}
+                    <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                      <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row">
+                        <DemoAwareMenuItemImage
+                          restaurantSlug={data.restaurant.slug}
+                          itemId={item.id}
+                          itemName={item.name}
+                          fallbackUrl={item.imageUrl}
+                          className="h-28 w-full shrink-0 overflow-hidden rounded-xl border bg-white shadow-sm sm:w-36"
+                        />
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <h3 className="font-medium">{item.name}</h3>
+                            {item.isPromoted ? (
+                              <Badge className="border-0 bg-violet-100 text-violet-900">Promoted</Badge>
+                            ) : null}
+                            {!item.isAvailable ? (
+                              <Badge variant="destructive">Sold out</Badge>
+                            ) : null}
+                          </div>
+                          <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+                            {item.description}
+                          </p>
+                          <div className="mt-3 flex flex-wrap gap-1.5">
+                            <Badge variant="outline">
+                              EN {item.translations.some((entry) => entry.locale === "en") ? "ready" : "missing"}
                             </Badge>
-                          ))}
+                            {item.allergens.map((allergen) => (
+                              <Badge
+                                key={allergen.code}
+                                variant={
+                                  allergen.verificationStatus === "VERIFIED"
+                                    ? "outline"
+                                    : "destructive"
+                                }
+                              >
+                                {allergen.name}: {allergen.status.replaceAll("_", " ")}
+                              </Badge>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                      <div className="font-mono text-sm font-medium">
-                        {formatPrice(item.priceCents, data.restaurant.currency)}
+                      <div className="flex shrink-0 items-center gap-2 lg:flex-col lg:items-end">
+                        <div className="font-mono text-sm font-medium">
+                          {formatPrice(item.priceCents, data.restaurant.currency)}
+                        </div>
+                        <MenuItemImageOpenButton
+                          restaurantSlug={data.restaurant.slug}
+                          itemId={item.id}
+                          fallbackUrl={item.imageUrl}
+                        />
                       </div>
                     </div>
+                    <MenuItemImageUploadForm
+                      restaurantId={restaurantId}
+                      restaurantSlug={data.restaurant.slug}
+                      menuItemId={item.id}
+                      itemName={item.name}
+                      demoMode={isDemo}
+                    />
                     <form action={upsertTranslation} className="mt-3 grid gap-2 rounded-xl bg-white p-2 md:grid-cols-[120px_1fr_1.5fr_auto]">
                       <input type="hidden" name="menuItemId" value={item.id} />
                       <Input name="locale" defaultValue="en" aria-label="Locale" disabled={isDemo} />
@@ -327,6 +353,9 @@ export default async function MenuManagerPage({
                 />
                 <Textarea name="description" placeholder="Short description" disabled={isDemo} />
                 <Input name="imageUrl" placeholder="Image URL" disabled={isDemo} />
+                <p className="text-xs text-muted-foreground">
+                  After creating a dish, upload a replacement photo directly from the item row.
+                </p>
                 <label className="flex items-center gap-2 text-sm">
                   <input name="isAvailable" type="checkbox" defaultChecked disabled={isDemo} />
                   Available

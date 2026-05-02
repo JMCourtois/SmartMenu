@@ -13,6 +13,7 @@ import { hasDatabaseUrl } from "@/lib/db";
 import {
   createMenuCategory,
   createMenuItem,
+  updateMenuItemImage,
   upsertMenuItemTranslation,
 } from "@/lib/menu/mutations";
 import {
@@ -44,6 +45,43 @@ export async function createMenuItemAction(
   const { user } = await requireRestaurantAccess(restaurantId, "menu:write");
   await createMenuItem({ formData, actorUserId: user.id });
   revalidatePath(`/dashboard/restaurants/${restaurantId}/menu`);
+}
+
+export async function uploadMenuItemImageAction(
+  restaurantId: string,
+  formData: FormData,
+) {
+  if (!hasDatabaseUrl()) {
+    return {
+      ok: false,
+      message: "Connect the database and Blob token to persist uploaded menu images.",
+    };
+  }
+
+  try {
+    const { user } = await requireRestaurantAccess(restaurantId, "menu:write");
+    const result = await updateMenuItemImage({
+      restaurantId,
+      formData,
+      actorUserId: user.id,
+    });
+    revalidatePath(`/dashboard/restaurants/${restaurantId}/menu`);
+    revalidatePath(`/r/${result.restaurantSlug}`);
+
+    return {
+      ok: true,
+      message: "Image saved to the draft item.",
+      imageUrl: result.imageUrl,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "The image could not be uploaded.",
+    };
+  }
 }
 
 export async function upsertTranslationAction(

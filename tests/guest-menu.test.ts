@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
 import path from "node:path";
 
-import { demoPublishedMenus } from "@/lib/demo-data";
+import { getDemoDishImageSource } from "@/lib/demo-dish-images";
+import { demoManagerRestaurantsById, demoPublishedMenus } from "@/lib/demo-data";
 import {
   filterMenuCategories,
   formatLocalizedPrice,
@@ -173,16 +174,22 @@ describe("guest menu views and filters", () => {
     }
   });
 
-  it("points every demo item at a generated local dish image", () => {
+  it("points every demo item at a curated stock photo by default", () => {
+    expect(existsSync(path.join(process.cwd(), "scripts", "generate-demo-dish-images.py"))).toBe(
+      false,
+    );
+    expect(existsSync(path.join(process.cwd(), "scripts", "generate-demo-dish-images.ts"))).toBe(
+      true,
+    );
+
     for (const menu of demoPublishedMenus) {
+      expect(demoManagerRestaurantsById[menu.restaurant.id]).toBeTruthy();
       for (const item of getAllMenuItems(menu)) {
-        expect(item.imageUrl).toMatch(
-          new RegExp(`^/demo-dishes/${menu.restaurant.slug}/${item.slug}\\.webp$`),
-        );
-        expect(item.imageUrl).not.toContain("images.unsplash.com");
-        expect(
-          existsSync(path.join(process.cwd(), "public", item.imageUrl!.replace(/^\//, ""))),
-        ).toBe(true);
+        const imageSource = getDemoDishImageSource(menu.restaurant.slug, item.slug);
+        expect(imageSource).toBeTruthy();
+        expect(imageSource?.url).toBe(item.imageUrl);
+        expect(item.imageUrl).toMatch(/^https:\/\/images\.unsplash\.com\/photo-/);
+        expect(item.imageUrl).not.toContain("source.unsplash.com");
       }
     }
   });

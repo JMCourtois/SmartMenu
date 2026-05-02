@@ -52,6 +52,7 @@ describe("AI concierge safety", () => {
       response: {
         answer: "Try one dish.",
         recommendedItemIds: [itemId, "unknown-item"],
+        recommendationReasons: [],
         safetyNotes: [],
         followUpPrompts: [],
       },
