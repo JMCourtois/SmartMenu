@@ -1,0 +1,349 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  clerkUserId String?  @unique
+  email       String   @unique
+  name        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  organizations       OrganizationUser[]
+  auditLogs           AuditLog[]
+  createdMenuVersions MenuVersion[]         @relation("MenuVersionCreatedBy")
+  requestedChangeSets AiChangeSet[]         @relation("AiChangeSetRequestedBy")
+  verifiedAllergens   MenuItemAllergen[]    @relation("AllergenVerifiedBy")
+  verifiedDietaryTags MenuItemDietaryTag[]  @relation("DietaryTagVerifiedBy")
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users       OrganizationUser[]
+  restaurants Restaurant[]
+}
+
+model OrganizationUser {
+  id             String  @id @default(cuid())
+  organizationId String
+  userId         String
+  role           OrgRole @default(MANAGER)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+}
+
+enum OrgRole {
+  OWNER
+  MANAGER
+  STAFF
+  VIEWER
+}
+
+model Restaurant {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  slug           String   @unique
+  description    String?
+  defaultLocale  String   @default("de")
+  currency       String   @default("EUR")
+  brandColor     String   @default("#1f2937")
+  legalNotice    String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  locations    Location[]
+  menus        Menu[]
+  events       AnalyticsEvent[]
+
+  @@index([organizationId])
+}
+
+model Location {
+  id           String @id @default(cuid())
+  restaurantId String
+  name         String
+  address      String?
+  city         String @default("Munich")
+  country      String @default("DE")
+  timezone     String @default("Europe/Berlin")
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@index([restaurantId])
+}
+
+model Menu {
+  id           String     @id @default(cuid())
+  restaurantId String
+  name         String
+  status       MenuStatus @default(DRAFT)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  restaurant Restaurant    @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  versions   MenuVersion[]
+
+  @@index([restaurantId])
+}
+
+enum MenuStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+model MenuVersion {
+  id          String            @id @default(cuid())
+  menuId      String
+  version     Int
+  status      MenuVersionStatus @default(DRAFT)
+  publishedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  createdById String?
+
+  menu       Menu           @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  createdBy  User?          @relation("MenuVersionCreatedBy", fields: [createdById], references: [id])
+  categories MenuCategory[]
+  changeSets AiChangeSet[]
+
+  @@unique([menuId, version])
+  @@index([menuId, status])
+}
+
+enum MenuVersionStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model MenuCategory {
+  id            String @id @default(cuid())
+  menuVersionId String
+  name          String
+  sortOrder     Int    @default(0)
+
+  menuVersion MenuVersion @relation(fields: [menuVersionId], references: [id], onDelete: Cascade)
+  items       MenuItem[]
+
+  @@index([menuVersionId, sortOrder])
+}
+
+model MenuItem {
+  id            String   @id @default(cuid())
+  categoryId    String
+  name          String
+  slug          String
+  description   String?
+  priceCents    Int
+  isAvailable   Boolean  @default(true)
+  isPromoted    Boolean  @default(false)
+  sortOrder     Int      @default(0)
+  imageUrl      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  category     MenuCategory          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  translations MenuItemTranslation[]
+  allergens    MenuItemAllergen[]
+  dietaryTags  MenuItemDietaryTag[]
+  pairings     PairingSuggestion[]
+  events       AnalyticsEvent[]
+
+  @@unique([categoryId, slug])
+  @@index([categoryId, sortOrder])
+}
+
+model MenuItemTranslation {
+  id          String  @id @default(cuid())
+  menuItemId  String
+  locale      String
+  name        String
+  description String?
+
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+
+  @@unique([menuItemId, locale])
+  @@index([locale])
+}
+
+model Allergen {
+  id   String @id @default(cuid())
+  code String @unique
+  name String
+
+  items MenuItemAllergen[]
+}
+
+model MenuItemAllergen {
+  id                 String             @id @default(cuid())
+  menuItemId          String
+  allergenId          String
+  status              AllergenStatus
+  verificationStatus  VerificationStatus @default(UNVERIFIED)
+  verifiedById        String?
+  verifiedAt          DateTime?
+  note                String?
+
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+  allergen   Allergen @relation(fields: [allergenId], references: [id], onDelete: Cascade)
+  verifiedBy User?    @relation("AllergenVerifiedBy", fields: [verifiedById], references: [id])
+
+  @@unique([menuItemId, allergenId])
+  @@index([verificationStatus])
+}
+
+enum AllergenStatus {
+  CONTAINS
+  MAY_CONTAIN
+  DOES_NOT_CONTAIN
+  UNKNOWN
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  VERIFIED
+  NEEDS_REVIEW
+}
+
+model DietaryTag {
+  id    String @id @default(cuid())
+  code  String @unique
+  name  String
+  safetySensitive Boolean @default(false)
+
+  items MenuItemDietaryTag[]
+}
+
+model MenuItemDietaryTag {
+  id                 String             @id @default(cuid())
+  menuItemId          String
+  tagId               String
+  verificationStatus  VerificationStatus @default(UNVERIFIED)
+  verifiedById        String?
+  verifiedAt          DateTime?
+  note                String?
+
+  menuItem   MenuItem   @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+  tag        DietaryTag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  verifiedBy User?      @relation("DietaryTagVerifiedBy", fields: [verifiedById], references: [id])
+
+  @@unique([menuItemId, tagId])
+  @@index([verificationStatus])
+}
+
+model PairingSuggestion {
+  id             String @id @default(cuid())
+  menuItemId      String
+  pairedItemName  String
+  reason          String?
+  priority        Int    @default(0)
+
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+
+  @@index([menuItemId, priority])
+}
+
+model AiChangeSet {
+  id            String         @id @default(cuid())
+  menuVersionId String
+  requestedById String?
+  prompt        String
+  status        AiChangeStatus @default(PROCESSING)
+  riskLevel     AiRiskLevel    @default(LOW)
+  summary       String?
+  warnings      Json?
+  createdAt     DateTime       @default(now())
+  appliedAt     DateTime?
+
+  menuVersion MenuVersion        @relation(fields: [menuVersionId], references: [id], onDelete: Cascade)
+  requestedBy User?              @relation("AiChangeSetRequestedBy", fields: [requestedById], references: [id])
+  changes     AiProposedChange[]
+
+  @@index([menuVersionId, status])
+}
+
+model AiProposedChange {
+  id          String  @id @default(cuid())
+  changeSetId String
+  entityType  String
+  entityId    String?
+  operation   String
+  field       String?
+  oldValue    Json?
+  newValue    Json?
+  reason      String?
+
+  changeSet AiChangeSet @relation(fields: [changeSetId], references: [id], onDelete: Cascade)
+
+  @@index([changeSetId])
+  @@index([entityType, entityId])
+}
+
+enum AiChangeStatus {
+  PROCESSING
+  PROPOSED
+  APPROVED
+  REJECTED
+  APPLIED
+  FAILED
+}
+
+enum AiRiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  BLOCKED
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String?
+  action      String
+  entityType  String
+  entityId    String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  actorUser User? @relation(fields: [actorUserId], references: [id])
+
+  @@index([actorUserId, createdAt])
+  @@index([entityType, entityId])
+}
+
+model AnalyticsEvent {
+  id            String   @id @default(cuid())
+  restaurantId  String
+  eventType     String
+  locale        String?
+  source        String?
+  tableCode     String?
+  menuItemId    String?
+  sessionIdHash String?
+  metadata      Json?
+  createdAt     DateTime @default(now())
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  menuItem   MenuItem?  @relation(fields: [menuItemId], references: [id])
+
+  @@index([restaurantId, createdAt])
+  @@index([restaurantId, eventType])
+  @@index([menuItemId])
+}
