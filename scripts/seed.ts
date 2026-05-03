@@ -1,8 +1,21 @@
-import { AllergenStatus, PrismaClient, VerificationStatus } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 import { slugify } from "../src/lib/menu/slug";
 
 const prisma = new PrismaClient();
+
+type SeedAllergenStatus = "CONTAINS" | "MAY_CONTAIN" | "DOES_NOT_CONTAIN" | "UNKNOWN";
+type SeedVerificationStatus = "UNVERIFIED" | "VERIFIED" | "NEEDS_REVIEW";
+type SeedDishAllergen = [code: string, status: SeedAllergenStatus, verificationStatus: SeedVerificationStatus];
+type SeedDish = {
+  name: string;
+  description: string;
+  priceCents: number;
+  tags: string[];
+  allergens: SeedDishAllergen[];
+  pairing: string;
+  promoted: boolean;
+};
 
 async function main() {
   const user = await prisma.user.upsert({
@@ -108,13 +121,13 @@ async function main() {
     },
   });
 
-  const dishes = [
+  const dishes: SeedDish[] = [
     {
       name: "Schweinshaxe",
       description: "Crispy roasted pork knuckle with potato dumpling and dark beer gravy.",
       priceCents: 2450,
       tags: ["traditional", "pork"],
-      allergens: [["gluten", "MAY_CONTAIN" as const, "NEEDS_REVIEW" as const]],
+      allergens: [["gluten", "MAY_CONTAIN", "NEEDS_REVIEW"]],
       pairing: "Munich Helles",
       promoted: true,
     },
@@ -124,9 +137,9 @@ async function main() {
       priceCents: 1690,
       tags: ["traditional", "vegetarian"],
       allergens: [
-        ["gluten", "CONTAINS" as const, "VERIFIED" as const],
-        ["milk", "CONTAINS" as const, "VERIFIED" as const],
-        ["egg", "CONTAINS" as const, "VERIFIED" as const],
+        ["gluten", "CONTAINS", "VERIFIED"],
+        ["milk", "CONTAINS", "VERIFIED"],
+        ["egg", "CONTAINS", "VERIFIED"],
       ],
       pairing: "Dry Riesling",
       promoted: false,
@@ -137,8 +150,8 @@ async function main() {
       priceCents: 1090,
       tags: ["vegetarian", "best-with-beer"],
       allergens: [
-        ["milk", "CONTAINS" as const, "VERIFIED" as const],
-        ["gluten", "CONTAINS" as const, "VERIFIED" as const],
+        ["milk", "CONTAINS", "VERIFIED"],
+        ["gluten", "CONTAINS", "VERIFIED"],
       ],
       pairing: "Weissbier",
       promoted: false,
@@ -186,8 +199,8 @@ async function main() {
       data: dish.allergens.map(([code, status, verificationStatus]) => ({
         menuItemId: item.id,
         allergenId: allergenByCode.get(code)!.id,
-        status: status as AllergenStatus,
-        verificationStatus: verificationStatus as VerificationStatus,
+        status,
+        verificationStatus,
         verifiedById: verificationStatus === "VERIFIED" ? user.id : null,
         verifiedAt: verificationStatus === "VERIFIED" ? new Date() : null,
       })),
