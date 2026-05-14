@@ -55,12 +55,12 @@ const icons: Record<DietaryTagIconKey, SvgIcon> = {
 };
 
 const toneClassNames: Record<DietaryTagTone, string> = {
-  accent: "border-emerald-200 bg-emerald-50 text-emerald-800",
-  danger: "border-red-200 bg-red-50 text-red-700",
-  fresh: "border-teal-200 bg-teal-50 text-teal-800",
-  gold: "border-amber-200 bg-amber-50 text-amber-800",
-  neutral: "border-slate-200 bg-slate-50 text-slate-700",
-  spicy: "border-orange-200 bg-orange-50 text-orange-800",
+  accent: "border-[var(--accent-soft)] bg-[var(--accent-soft)] text-[var(--accent-dark)]",
+  danger: "border-[var(--danger-soft)] bg-[var(--danger-soft)] text-[var(--danger)]",
+  fresh: "border-[var(--secondary-soft)] bg-[var(--secondary-soft)] text-[var(--accent-dark)]",
+  gold: "border-[var(--warn-soft)] bg-[var(--warn-soft)] text-[var(--warn)]",
+  neutral: "border-[var(--hairline)] bg-[var(--paper-warm)] text-[var(--muted)]",
+  spicy: "border-[var(--warn-soft)] bg-[var(--warn-soft)] text-[var(--warn)]",
 };
 
 export function MenuTagIcon({

@@ -81,7 +81,7 @@ export default async function MenuManagerPage({
   const soldOutCount = draftItems.filter((item) => !item.isAvailable).length;
 
   return (
-    <main className="flex flex-col gap-5 p-4 sm:p-6">
+    <main className="flex flex-col gap-5">
       <ManagerPageHeader
         title="Menu operations"
         description="Manage the structured draft menu, check translation and allergen readiness, then publish only when the public QR menu is ready."
@@ -100,7 +100,7 @@ export default async function MenuManagerPage({
       />
 
       {isDemo ? (
-        <Alert className="border-amber-200 bg-amber-50 text-amber-950">
+        <Alert className="border-[var(--hairline)] bg-[var(--secondary-soft)] text-[var(--accent-dark)]">
           <AlertTriangle />
           <AlertTitle>Demo mode</AlertTitle>
           <AlertDescription>
@@ -145,12 +145,12 @@ export default async function MenuManagerPage({
       <div className="grid gap-4 xl:grid-cols-[1fr_360px]">
         <section className="flex flex-col gap-4">
           {data.draftVersion.categories.map((category) => (
-            <Card key={category.id} className="overflow-hidden border-0 bg-white shadow-sm ring-1 ring-black/5">
-              <CardHeader className="border-b bg-linear-to-r from-emerald-50 to-white">
+            <Card key={category.id} className="overflow-hidden">
+              <CardHeader className="border-b border-[var(--hairline-soft)] bg-[var(--paper-warm)]">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <span className="flex size-8 items-center justify-center rounded-lg bg-emerald-700 text-sm text-white">
+                      <span className="flex size-8 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent-dark)] font-price text-sm text-white">
                         {category.sortOrder}
                       </span>
                       {category.name}
@@ -164,7 +164,7 @@ export default async function MenuManagerPage({
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
                 {category.items.map((item) => (
-                  <div key={item.id} className="rounded-xl border bg-slate-50/70 p-3">
+                  <div key={item.id} className="rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
                     <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                       <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row">
                         <DemoAwareMenuItemImage
@@ -172,13 +172,13 @@ export default async function MenuManagerPage({
                           itemId={item.id}
                           itemName={item.name}
                           fallbackUrl={item.imageUrl}
-                          className="h-28 w-full shrink-0 overflow-hidden rounded-xl border bg-white shadow-sm sm:w-36"
+                          className="h-28 w-full shrink-0 overflow-hidden rounded-[var(--radius-md)] bg-white shadow-[var(--ring-hairline)] sm:w-36"
                         />
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
                             <h3 className="font-medium">{item.name}</h3>
                             {item.isPromoted ? (
-                              <Badge className="border-0 bg-violet-100 text-violet-900">Promoted</Badge>
+                              <Badge variant="secondary">Promoted</Badge>
                             ) : null}
                             {!item.isAvailable ? (
                               <Badge variant="destructive">Sold out</Badge>
@@ -207,7 +207,7 @@ export default async function MenuManagerPage({
                         </div>
                       </div>
                       <div className="flex shrink-0 items-center gap-2 lg:flex-col lg:items-end">
-                        <div className="font-mono text-sm font-medium">
+                        <div className="font-price text-sm font-semibold">
                           {formatPrice(item.priceCents, data.restaurant.currency)}
                         </div>
                         <MenuItemImageOpenButton
@@ -224,7 +224,7 @@ export default async function MenuManagerPage({
                       itemName={item.name}
                       demoMode={isDemo}
                     />
-                    <form action={upsertTranslation} className="mt-3 grid gap-2 rounded-xl bg-white p-2 md:grid-cols-[120px_1fr_1.5fr_auto]">
+                    <form action={upsertTranslation} className="mt-3 grid gap-2 rounded-[var(--radius-md)] bg-white p-2 shadow-[var(--ring-hairline)] md:grid-cols-[120px_1fr_1.5fr_auto]">
                       <input type="hidden" name="menuItemId" value={item.id} />
                       <Input name="locale" defaultValue="en" aria-label="Locale" disabled={isDemo} />
                       <Input
@@ -298,7 +298,7 @@ export default async function MenuManagerPage({
                 action: (
                   <Button
                     variant="outline"
-                    className="w-full bg-white text-slate-950 hover:bg-white/90"
+                    className="w-full bg-white text-[var(--ink)] hover:bg-white/90"
                     render={<Link href={`/r/${data.restaurant.slug}`} target="_blank" />}
                   >
                     Preview QR menu
@@ -308,7 +308,7 @@ export default async function MenuManagerPage({
             ]}
           />
 
-          <Card className="border-0 bg-white shadow-sm ring-1 ring-black/5">
+          <Card>
             <CardHeader>
               <CardTitle>Add category</CardTitle>
               <CardDescription>Create a new section in the current draft.</CardDescription>
@@ -325,7 +325,7 @@ export default async function MenuManagerPage({
             </CardContent>
           </Card>
 
-          <Card className="border-0 bg-white shadow-sm ring-1 ring-black/5">
+          <Card>
             <CardHeader>
               <CardTitle>Add dish</CardTitle>
               <CardDescription>Manual edits are always written to the draft.</CardDescription>
@@ -372,7 +372,7 @@ export default async function MenuManagerPage({
             </CardContent>
           </Card>
 
-          <Card className="border-0 bg-white shadow-sm ring-1 ring-black/5">
+          <Card>
             <CardHeader>
               <CardTitle>Version history</CardTitle>
               <CardDescription>Restore any previous version as a new draft.</CardDescription>

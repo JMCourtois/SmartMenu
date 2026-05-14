@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ChefHat, ClipboardCheck } from "lucide-react";
+import { ClipboardCheck } from "lucide-react";
 
 import { ManagerNav } from "@/components/dashboard/ManagerNav";
+import { SmartEyebrow, SmartMenuLogo } from "@/components/smartmenu/primitives";
 import { requireUser } from "@/lib/auth";
 import { getDashboardRestaurants } from "@/lib/menu/queries";
 
@@ -52,31 +53,26 @@ export default async function DashboardLayout({
     : [];
 
   return (
-    <div className="min-h-screen bg-[#f5f7f2]">
-      <div className="mx-auto grid min-h-screen max-w-7xl lg:grid-cols-[240px_1fr]">
-        <aside className="border-b bg-[#eef4ea] px-4 py-4 lg:border-b-0 lg:border-r lg:border-emerald-900/10">
-          <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
-            <span className="flex size-9 items-center justify-center rounded-xl bg-emerald-800 text-white shadow-sm">
-              <ChefHat />
-            </span>
-            SmartMenu
+    <div className="min-h-screen bg-[var(--paper)] text-[var(--ink)]" data-theme="hofbrau">
+      <div className="mx-auto grid min-h-screen max-w-[1380px] gap-6 p-4 lg:grid-cols-[260px_1fr] lg:p-6">
+        <aside className="flex flex-col gap-4 rounded-[var(--radius-xl)] bg-[var(--paper-warm)] p-4 shadow-[var(--ring-hairline)] lg:sticky lg:top-6 lg:max-h-[calc(100vh-48px)] lg:self-start lg:overflow-y-auto">
+          <Link href="/dashboard" className="no-underline">
+            <SmartMenuLogo sublabel="Manager" />
           </Link>
-          <div className="mt-5 rounded-2xl border border-emerald-900/10 bg-white p-4 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-800">
-              Restaurant workspace
-            </p>
-            <p className="mt-1 truncate font-medium">
+          <div className="rounded-[var(--radius-md)] bg-white p-4 shadow-[var(--ring-hairline)]">
+            <SmartEyebrow className="text-[var(--muted)]">Restaurant</SmartEyebrow>
+            <p className="mt-2 truncate text-sm font-semibold">
               {firstRestaurant?.name ?? "No restaurants"}
             </p>
-            <p className="mt-1 truncate text-xs text-muted-foreground">{user.email}</p>
-            <div className="mt-3 rounded-xl bg-amber-50 p-3 text-xs leading-5 text-amber-900">
+            <p className="mt-1 truncate text-xs text-[var(--muted)]">{user.email}</p>
+            <div className="mt-4 rounded-[var(--radius-md)] bg-[var(--secondary-soft)] p-3 text-xs leading-5 text-[var(--accent-dark)]">
               <ClipboardCheck data-icon="inline-start" />
               Review draft changes before publishing the public QR menu.
             </div>
           </div>
           <ManagerNav items={nav} />
         </aside>
-        <div className="min-w-0 bg-[#f8faf5]">{children}</div>
+        <div className="min-w-0">{children}</div>
       </div>
     </div>
   );

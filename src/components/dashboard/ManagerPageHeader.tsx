@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ExternalLink } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { SmartBadge, SmartEyebrow } from "@/components/smartmenu/primitives";
 import { Button } from "@/components/ui/button";
 
 type Props = {
@@ -25,18 +25,19 @@ export function ManagerPageHeader({
   primaryAction,
 }: Props) {
   return (
-    <header className="rounded-2xl border bg-white p-4 shadow-sm sm:p-5">
+    <header className="rounded-[var(--radius-lg)] bg-white p-5 shadow-[var(--shadow-rest),var(--ring-hairline)] sm:p-6">
       <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            {restaurantName ? <Badge variant="secondary">{restaurantName}</Badge> : null}
-            {draftLabel ? <Badge variant="outline">{draftLabel}</Badge> : null}
-            <Badge className="border-0 bg-emerald-700 text-white">{statusLabel}</Badge>
+            {restaurantName ? <SmartBadge>{restaurantName}</SmartBadge> : null}
+            {draftLabel ? <SmartBadge variant="outline">{draftLabel}</SmartBadge> : null}
+            <SmartBadge variant="accent">{statusLabel}</SmartBadge>
           </div>
-          <h1 className="text-2xl font-semibold tracking-normal text-slate-950 sm:text-3xl">
+          <SmartEyebrow className="text-[var(--muted)]">SmartMenu manager</SmartEyebrow>
+          <h1 className="mt-2 font-display text-4xl font-semibold leading-none text-[var(--ink)] sm:text-5xl">
             {title}
           </h1>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{description}</p>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-[var(--muted)]">{description}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {restaurantSlug ? (

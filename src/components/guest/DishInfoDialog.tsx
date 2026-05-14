@@ -1,18 +1,21 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { Flame, Info, MessageCircle, ShieldAlert, Soup, Utensils } from "lucide-react";
 
 import { MenuTagBadge } from "@/components/guest/MenuTagVisual";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  SmartEyebrow,
+  SmartPrice,
+} from "@/components/smartmenu/primitives";
 import {
   formatLocalizedPrice,
   getGuestCopy,
@@ -41,14 +44,46 @@ function SpiceMeter({ value }: { value: number }) {
       {Array.from({ length: 5 }).map((_, index) => (
         <span
           key={index}
-          className="h-2.5 w-4 rounded-full"
+          className="h-1.5 w-4 rounded-full"
           style={{
             backgroundColor:
-              index < value ? "var(--menu-secondary)" : "color-mix(in srgb, var(--menu-muted) 20%, white)",
+              index < value ? "var(--secondary)" : "color-mix(in srgb, var(--muted) 18%, white)",
           }}
         />
       ))}
     </div>
+  );
+}
+
+function DetailCard({
+  title,
+  icon,
+  children,
+  tone = "white",
+}: {
+  title: string;
+  icon?: ReactNode;
+  children: ReactNode;
+  tone?: "white" | "accent" | "secondary";
+}) {
+  return (
+    <section
+      className="rounded-[var(--radius-lg)] p-4 shadow-[var(--ring-hairline)]"
+      style={{
+        background:
+          tone === "accent"
+            ? "var(--accent-soft)"
+            : tone === "secondary"
+              ? "var(--secondary-soft)"
+              : "var(--white)",
+      }}
+    >
+      <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-[var(--ink)]">
+        {icon}
+        {title}
+      </div>
+      <div className="text-sm leading-6 text-[var(--muted)]">{children}</div>
+    </section>
   );
 }
 
@@ -73,9 +108,9 @@ export function DishInfoDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] overflow-y-auto p-0 sm:max-w-3xl">
-        <div className="grid overflow-hidden rounded-lg md:grid-cols-[0.95fr_1.05fr]">
-          <div className="relative min-h-64 bg-muted md:min-h-full">
+      <DialogContent className="max-h-[92vh] overflow-hidden rounded-[28px] bg-[var(--paper)] p-0 shadow-[var(--shadow-overlay)] ring-0 sm:max-w-5xl">
+        <div className="grid max-h-[92vh] overflow-y-auto md:grid-cols-[0.95fr_1.05fr]">
+          <div className="relative min-h-80 bg-[var(--ink)] md:min-h-full">
             {item.imageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -85,92 +120,82 @@ export function DishInfoDialog({
               />
             ) : null}
             <div
-              className="absolute inset-x-0 bottom-0 p-5 text-white"
-              style={{
-                background:
-                  "linear-gradient(180deg, transparent, color-mix(in srgb, var(--menu-accent-dark) 88%, black))",
-              }}
-            >
-              <div className="mb-2 inline-flex rounded-full bg-white/95 px-3 py-1 font-mono text-sm font-semibold text-foreground shadow-sm">
-                {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
-              </div>
-              <h2 className="text-3xl font-semibold tracking-normal">{localizedName(item, locale)}</h2>
-              <p className="mt-2 line-clamp-3 text-sm leading-6 text-white/90">
+              className="absolute inset-0"
+              style={{ background: "var(--scrim-bottom)" }}
+            />
+            <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
+              <span className="mb-4 inline-flex rounded-full bg-white/95 px-4 py-2 text-[var(--ink)]">
+                <SmartPrice>
+                  {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
+                </SmartPrice>
+              </span>
+              <h2 className="font-display text-4xl font-semibold leading-none sm:text-5xl">
+                {localizedName(item, locale)}
+              </h2>
+              <p className="mt-3 max-w-md text-sm leading-6 text-white/90">
                 {localizedDescription(item, locale)}
               </p>
             </div>
           </div>
 
-          <div className="space-y-4 p-5">
+          <div className="flex flex-col gap-4 p-5 sm:p-7">
             <DialogHeader className="sr-only">
               <DialogTitle>{localizedName(item, locale)}</DialogTitle>
               <DialogDescription>{localizedDescription(item, locale)}</DialogDescription>
             </DialogHeader>
 
-            <section
-              className="rounded-2xl p-4"
-              style={{ backgroundColor: "var(--menu-accent-soft)" }}
+            <DetailCard
+              title={copy.explanation}
+              icon={<Info className="size-4 text-[var(--accent-dark)]" />}
+              tone="accent"
             >
-              <div className="mb-2 flex items-center gap-2 text-sm font-semibold">
-                <Info className="size-4" />
-                {copy.explanation}
-              </div>
-              <p className="text-sm leading-6 text-foreground/80">
-                {localizedItemField(item, locale, "explanation")}
-              </p>
-            </section>
+              {localizedItemField(item, locale, "explanation")}
+            </DetailCard>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              <section className="rounded-2xl border bg-white p-4 shadow-sm">
-                <div className="mb-2 flex items-center gap-2 text-sm font-semibold">
-                  <Soup className="size-4" style={{ color: "var(--menu-secondary)" }} />
-                  {copy.origin}
-                </div>
-                <p className="text-sm leading-6 text-muted-foreground">
-                  {localizedItemField(item, locale, "origin")}
-                </p>
-              </section>
-              <section
-                className="rounded-2xl border p-4 shadow-sm"
-                style={{ backgroundColor: "var(--menu-secondary-soft)" }}
+              <DetailCard
+                title={copy.origin}
+                icon={<Soup className="size-4 text-[var(--secondary)]" />}
               >
-                <div className="mb-2 flex items-center gap-2 text-sm font-semibold">
-                  <Utensils className="size-4" style={{ color: "var(--menu-secondary)" }} />
-                  {copy.tasteProfile}
-                </div>
-                <p className="text-sm leading-6 text-foreground/75">
-                  {localizedItemField(item, locale, "tasteProfile")}
-                </p>
-              </section>
+                {localizedItemField(item, locale, "origin")}
+              </DetailCard>
+              <DetailCard
+                title={copy.tasteProfile}
+                icon={<Utensils className="size-4 text-[var(--secondary)]" />}
+                tone="secondary"
+              >
+                {localizedItemField(item, locale, "tasteProfile")}
+              </DetailCard>
             </div>
 
-            <section className="rounded-2xl border bg-white p-4 shadow-sm">
-              <div className="mb-2 text-sm font-semibold">{copy.preparation}</div>
-              <p className="text-sm leading-6 text-muted-foreground">
-                {localizedItemField(item, locale, "preparation")}
-              </p>
-            </section>
+            <DetailCard title={copy.preparation}>
+              {localizedItemField(item, locale, "preparation")}
+            </DetailCard>
 
-            <section className="rounded-2xl border bg-white p-4 shadow-sm">
-              <div className="mb-3 text-sm font-semibold">{copy.ingredients}</div>
+            <DetailCard title={copy.ingredients}>
               <div className="flex flex-wrap gap-1.5">
                 {ingredients.map((ingredient) => (
-                  <Badge key={ingredient} variant="outline">
+                  <span
+                    key={ingredient}
+                    className="inline-flex min-h-7 items-center rounded-full border border-[var(--hairline)] bg-white px-3 text-xs text-[var(--ink-soft)]"
+                  >
                     {ingredient}
-                  </Badge>
+                  </span>
                 ))}
               </div>
-            </section>
+            </DetailCard>
 
-            <section className="rounded-2xl border bg-white p-4 shadow-sm">
-              <div className="mb-3 flex items-center justify-between gap-3 text-sm font-semibold">
-                <span className="inline-flex items-center gap-2">
-                  <Flame className="size-4" style={{ color: "var(--menu-secondary)" }} />
+            <DetailCard
+              title={copy.dietary}
+              icon={<Flame className="size-4 text-[var(--secondary)]" />}
+            >
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-xs font-medium text-[var(--ink-soft)]">
                   {copy.spiceLevel}
                 </span>
                 <SpiceMeter value={item.spiceLevel} />
               </div>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="mt-3 flex flex-wrap gap-1.5">
                 {item.dietaryTags.map((tag) => (
                   <MenuTagBadge
                     key={tag.code}
@@ -179,54 +204,73 @@ export function DishInfoDialog({
                   />
                 ))}
               </div>
-            </section>
+            </DetailCard>
 
-            <section className="rounded-2xl border border-destructive/20 bg-destructive/5 p-4">
-              <div className="mb-3 flex items-center gap-2 text-sm font-semibold">
+            <section className="rounded-[var(--radius-lg)] bg-[var(--danger-soft)] p-4 shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--danger)_18%,transparent)]">
+              <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-[var(--danger)]">
                 <ShieldAlert className="size-4" />
                 {copy.allergens}
               </div>
-              <div className="space-y-2">
-                {item.allergens.map((allergen) => (
-                  <div key={allergen.code} className="rounded-lg bg-white p-2 text-xs shadow-sm">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-medium">{localizedAllergenName(allergen, locale)}</span>
-                      <span className="font-mono text-[10px] uppercase text-muted-foreground">
-                        {allergen.status.replaceAll("_", " ")}
-                      </span>
+              <div className="grid gap-2">
+                {item.allergens.length ? (
+                  item.allergens.map((allergen) => (
+                    <div
+                      key={allergen.code}
+                      className="rounded-[var(--radius-sm)] bg-white p-3 text-xs shadow-[var(--ring-hairline)]"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-medium text-[var(--ink)]">
+                          {localizedAllergenName(allergen, locale)}
+                        </span>
+                        <span className="font-price text-[10px] uppercase text-[var(--muted)]">
+                          {allergen.status.replaceAll("_", " ")}
+                        </span>
+                      </div>
+                      {allergen.note ? (
+                        <p className="mt-1 leading-5 text-[var(--muted)]">{allergen.note}</p>
+                      ) : null}
                     </div>
-                    {allergen.note ? (
-                      <p className="mt-1 leading-5 text-muted-foreground">{allergen.note}</p>
-                    ) : null}
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="text-xs leading-5 text-[var(--muted)]">
+                    {copy.safetyNotice}
+                  </p>
+                )}
               </div>
-              <p className="mt-3 text-xs leading-5 text-muted-foreground">
+              <p className="mt-3 text-xs leading-5 text-[var(--muted)]">
                 {safetySensitive ? `${copy.askStaff}. ` : ""}
                 {copy.safetyNotice}
               </p>
             </section>
 
             {item.pairings.length ? (
-              <section className="rounded-2xl border bg-white p-4 shadow-sm">
-                <div className="mb-3 text-sm font-semibold">{copy.pairings}</div>
+              <DetailCard title={copy.pairings}>
                 <div className="grid gap-2">
                   {item.pairings.map((pairing) => (
-                    <div key={pairing.id} className="rounded-xl bg-muted/60 p-3 text-sm">
-                      <div className="font-medium">{pairing.pairedItemName}</div>
+                    <div
+                      key={pairing.id}
+                      className="rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3"
+                    >
+                      <div className="font-semibold text-[var(--ink)]">
+                        {pairing.pairedItemName}
+                      </div>
                       {pairing.reason ? (
-                        <p className="mt-1 text-xs leading-5 text-muted-foreground">{pairing.reason}</p>
+                        <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+                          {pairing.reason}
+                        </p>
                       ) : null}
                     </div>
                   ))}
                 </div>
-              </section>
+              </DetailCard>
             ) : null}
 
-            <DialogFooter className="items-stretch sm:items-center">
+            <div className="pt-1">
+              <SmartEyebrow className="mb-3 text-[var(--muted)]">
+                {copy.ai.title}
+              </SmartEyebrow>
               <Button
-                className="w-full border-0 text-white sm:w-auto"
-                style={{ backgroundColor: "var(--menu-accent-dark)" }}
+                className="w-full sm:w-auto"
                 onClick={() => {
                   onOpenChange(false);
                   onAskAi(
@@ -240,7 +284,7 @@ export function DishInfoDialog({
                 <MessageCircle data-icon="inline-start" />
                 {copy.askAiAboutDish}
               </Button>
-            </DialogFooter>
+            </div>
           </div>
         </div>
       </DialogContent>

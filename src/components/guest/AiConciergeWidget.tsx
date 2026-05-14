@@ -15,6 +15,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
+import { SmartEyebrow, SmartPrice } from "@/components/smartmenu/primitives";
 import { ConciergeResponseSchema, type ConciergeResponse } from "@/lib/ai/concierge";
 import {
   clearConversation,
@@ -298,48 +299,34 @@ export function AiConciergeWidget({
 
   return (
     <>
-      <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2">
-        <div
-          className={cn(
-            "hidden max-w-[260px] rounded-2xl px-4 py-3 text-sm font-medium shadow-xl ring-1 ring-black/10 sm:block",
-            !hasOpenedBefore && "animate-pulse",
-          )}
-          style={{
-            backgroundColor: "color-mix(in srgb, var(--menu-secondary-soft) 80%, white)",
-            color: "var(--menu-ink)",
-          }}
-        >
-          {copy.aiCtaHelper}
-        </div>
+      <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
         <Button
           size="lg"
           className={cn(
-            "h-auto rounded-full px-5 py-3 text-left text-base shadow-2xl ring-4 ring-white/80",
+            "h-12 rounded-full px-5 text-base shadow-[var(--shadow-overlay),0_0_0_4px_rgba(255,255,255,.85)]",
             !hasOpenedBefore && "animate-pulse",
           )}
           style={{ backgroundColor: "var(--menu-accent-dark)", color: "white" }}
           onClick={() => openConcierge("floating-widget")}
         >
           <Sparkles data-icon="inline-start" />
-          <span className="grid gap-0.5">
-            <span>{copy.getRecommendation}</span>
-            <span className="text-xs font-normal text-white/80">{copy.ai.subtitle}</span>
-          </span>
+          {copy.getRecommendation}
         </Button>
       </div>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent className="w-full sm:max-w-md">
-          <SheetHeader className="border-b pr-12">
-            <SheetTitle className="flex items-center gap-2">
+        <SheetContent className="w-full gap-0 border-l-0 bg-[var(--paper)] shadow-[var(--shadow-overlay)] sm:max-w-[440px]">
+          <SheetHeader className="border-b border-[var(--hairline-soft)] px-6 py-5 pr-12">
+            <SmartEyebrow>{copy.ai.oneClickDemos}</SmartEyebrow>
+            <SheetTitle className="mt-2 flex items-center gap-2 font-display text-3xl font-semibold leading-tight">
               <Sparkles style={{ color: "var(--menu-secondary)" }} />
               {copy.ai.title}
             </SheetTitle>
-            <SheetDescription>{copy.ai.subtitle}</SheetDescription>
+            <SheetDescription className="leading-6">{copy.ai.subtitle}</SheetDescription>
           </SheetHeader>
 
-          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 pb-4">
-            <section className="rounded-2xl border bg-background p-3">
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-5 py-5">
+            <section className="surface-card rounded-[var(--radius-lg)] p-3">
               <div className="mb-2 flex items-center justify-between gap-3">
                 <div className="text-sm font-semibold">{copy.ai.oneClickDemos}</div>
                 <Badge variant="outline">
@@ -353,7 +340,7 @@ export function AiConciergeWidget({
                     type="button"
                     variant="outline"
                     disabled={loading}
-                    className="h-auto justify-start rounded-2xl px-3 py-3 text-left whitespace-normal"
+                    className="h-auto justify-start rounded-[var(--radius-md)] px-3 py-3 text-left whitespace-normal"
                     onClick={() => sendDemoPrompt(prompt)}
                   >
                     <span className="grid gap-0.5">
@@ -367,11 +354,11 @@ export function AiConciergeWidget({
               </div>
             </section>
 
-            <section className="rounded-2xl border bg-white p-3 shadow-sm">
+            <section className="surface-card rounded-[var(--radius-lg)] p-3">
               <Button
                 type="button"
                 variant="outline"
-                className="h-11 w-full justify-between rounded-xl"
+                className="h-11 w-full justify-between rounded-[var(--radius-md)]"
                 onClick={() => setFiltersOpen((current) => !current)}
               >
                 <span className="inline-flex items-center gap-2">
@@ -381,8 +368,8 @@ export function AiConciergeWidget({
                 <Badge variant="secondary">{activePreferenceSummary.length}</Badge>
               </Button>
               {filtersOpen ? (
-                <div className="mt-3 rounded-xl p-3" style={{ backgroundColor: "var(--menu-accent-soft)" }}>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-normal text-muted-foreground">
+                <div className="mt-3 rounded-[var(--radius-md)] p-3" style={{ backgroundColor: "var(--menu-accent-soft)" }}>
+                  <div className="smart-eyebrow mb-2 text-[var(--muted)]">
                     {copy.ai.preferenceSummary}
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -458,8 +445,8 @@ export function AiConciergeWidget({
               ) : null}
             </section>
 
-            <section className="rounded-2xl border bg-muted/40 p-3">
-              <div className="mb-2 text-xs font-semibold uppercase tracking-normal text-muted-foreground">
+            <section className="rounded-[var(--radius-lg)] bg-[var(--paper-warm)] p-3">
+              <div className="smart-eyebrow mb-2 text-[var(--muted)]">
                 {copy.ai.activeContext}
               </div>
               <div className="flex flex-wrap gap-1.5">
@@ -479,7 +466,7 @@ export function AiConciergeWidget({
 
             {messages.length === 0 ? (
               <section className="grid gap-2">
-                <div className="rounded-2xl border border-dashed p-4 text-sm leading-6 text-muted-foreground">
+                <div className="rounded-[var(--radius-lg)] border border-dashed border-[var(--hairline)] p-4 text-sm leading-6 text-[var(--muted)]">
                   {copy.ai.oneClickDemos}. {copy.ai.subtitle}
                 </div>
               </section>
@@ -491,8 +478,8 @@ export function AiConciergeWidget({
                     className={cn(
                       "max-w-[88%] rounded-2xl px-3 py-2 text-sm leading-6",
                       message.role === "user"
-                        ? "ml-auto border border-black/15 bg-white text-black shadow-md"
-                        : "mr-auto border text-slate-950 shadow-sm",
+                        ? "ml-auto bg-white text-[var(--ink)] shadow-[var(--ring-hairline)]"
+                        : "mr-auto border text-[var(--ink)] shadow-sm",
                     )}
                     style={
                       message.role === "assistant"
@@ -518,7 +505,7 @@ export function AiConciergeWidget({
             )}
 
             {recommendedItems.length > 0 ? (
-              <section className="rounded-2xl border bg-background p-3">
+              <section className="surface-card rounded-[var(--radius-lg)] p-3">
                 <div className="mb-3 flex items-center gap-2 text-sm font-semibold">
                   <Sparkles style={{ color: "var(--menu-secondary)" }} />
                   {copy.ai.recommendations}
@@ -528,7 +515,7 @@ export function AiConciergeWidget({
                     <Link
                       key={item.id}
                       href={`/r/${menu.restaurant.slug}/item/${item.slug}`}
-                      className="rounded-xl border p-3 transition hover:bg-muted"
+                      className="rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 transition hover:bg-[var(--accent-soft)]"
                       onClick={() =>
                         onTrack("CONCIERGE_RECOMMENDATION_CLICKED", {
                           itemSlug: item.slug,
@@ -537,9 +524,9 @@ export function AiConciergeWidget({
                     >
                       <div className="flex items-center justify-between gap-3">
                         <div className="font-medium">{localizedName(item, locale)}</div>
-                        <div className="font-mono text-xs">
+                        <SmartPrice size="sm">
                           {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
-                        </div>
+                        </SmartPrice>
                       </div>
                       <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                         {item.spiceLevel > 0 ? (
@@ -564,7 +551,7 @@ export function AiConciergeWidget({
             ) : null}
 
             {lastResult?.safetyNotes.length ? (
-              <section className="rounded-2xl border border-destructive/20 bg-destructive/5 p-3">
+              <section className="rounded-[var(--radius-lg)] bg-[var(--danger-soft)] p-3 shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--danger)_18%,transparent)]">
                 <div className="mb-2 text-sm font-semibold">{copy.ai.safetyNotes}</div>
                 <div className="space-y-1">
                   {lastResult.safetyNotes.map((note) => (
@@ -578,7 +565,7 @@ export function AiConciergeWidget({
 
             {lastResult?.followUpPrompts.length ? (
               <section className="grid gap-2">
-                <div className="text-xs font-semibold uppercase tracking-normal text-muted-foreground">
+                <div className="smart-eyebrow text-[var(--muted)]">
                   {copy.ai.followUps}
                 </div>
                 {lastResult.followUpPrompts.map((prompt) => (
@@ -595,14 +582,14 @@ export function AiConciergeWidget({
             ) : null}
 
             {error ? (
-              <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-3 text-sm text-destructive">
+              <div className="rounded-[var(--radius-lg)] bg-[var(--danger-soft)] p-3 text-sm text-destructive">
                 {error}
               </div>
             ) : null}
           </div>
 
           <form
-            className="border-t p-4"
+            className="border-t border-[var(--hairline-soft)] bg-[var(--paper)] p-4"
             onSubmit={(event) => {
               event.preventDefault();
               void askConcierge(input);

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BarChart3, ChefHat, QrCode, Settings, Sparkles } from "lucide-react";
 
+import { SmartEyebrow } from "@/components/smartmenu/primitives";
 import { cn } from "@/lib/utils";
 
 type NavItem = {
@@ -25,7 +26,10 @@ export function ManagerNav({ items }: { items: NavItem[] }) {
   const pathname = usePathname();
 
   return (
-    <nav className="mt-5 flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
+    <nav className="flex gap-1 overflow-x-auto lg:flex-col lg:overflow-visible">
+      <SmartEyebrow className="hidden px-2 py-1 text-[var(--muted)] lg:block">
+        Workspace
+      </SmartEyebrow>
       {items.map((item) => {
         const Icon = iconByKey[item.icon];
         const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -35,15 +39,15 @@ export function ManagerNav({ items }: { items: NavItem[] }) {
             key={item.href}
             href={item.href}
             className={cn(
-              "inline-flex h-11 shrink-0 items-center gap-3 rounded-xl px-3 text-sm font-semibold transition",
+              "inline-flex h-10 shrink-0 items-center gap-3 rounded-[var(--radius-md)] px-3 text-sm font-medium transition duration-[var(--dur-fast)] ease-[var(--ease-out-smooth)]",
               active
-                ? "bg-white text-foreground shadow-sm ring-1 ring-black/5"
-                : "text-muted-foreground hover:bg-white/70 hover:text-foreground",
+                ? "bg-white text-[var(--ink)] shadow-[var(--ring-hairline)]"
+                : "text-[var(--muted)] hover:bg-white/70 hover:text-[var(--ink)]",
             )}
           >
             <span
-              className="flex size-8 items-center justify-center rounded-lg text-white shadow-sm"
-              style={{ backgroundColor: item.color }}
+              className="flex size-7 items-center justify-center rounded-[var(--radius-sm)] text-white"
+              style={{ backgroundColor: active ? "var(--accent-dark)" : item.color }}
             >
               <Icon className="size-4" />
             </span>

@@ -1,155 +1,164 @@
 import Link from "next/link";
-import { BarChart3, BookOpen, Camera, ChefHat, ExternalLink, QrCode, Sparkles } from "lucide-react";
+import type { CSSProperties } from "react";
+import { BookOpen, ExternalLink, QrCode, Sparkles } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  SmartBadge,
+  SmartEyebrow,
+  SmartHairline,
+  SmartMenuLogo,
+  SmartPrice,
+  SmartSurface,
+} from "@/components/smartmenu/primitives";
 import { demoRestaurantCards } from "@/lib/demo-data";
 
 export default function Home() {
+  const featured = demoRestaurantCards[0];
+
   return (
-    <main className="min-h-screen bg-[#f7f4ec]">
-      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+    <main className="min-h-screen bg-[var(--paper-light)] text-[var(--ink)]">
+      <section className="mx-auto flex max-w-7xl flex-col gap-14 px-4 py-6 sm:px-6 lg:px-10">
+        <header className="flex items-center justify-between gap-4">
+          <SmartMenuLogo sublabel="Restaurant menus" />
+          <Button variant="outline" render={<Link href={`/r/${featured.slug}`} />}>
+            <QrCode data-icon="inline-start" />
+            Open guest showcase
+          </Button>
+        </header>
+
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div className="max-w-3xl">
-            <div className="mb-5 flex size-12 items-center justify-center rounded-2xl bg-[#263b2e] text-white">
-              <ChefHat />
-            </div>
-            <h1 className="text-balance text-4xl font-semibold tracking-normal text-[#172018] sm:text-6xl">
+            <SmartEyebrow>QR menu · AI concierge</SmartEyebrow>
+            <h1 className="mt-5 text-balance font-display text-[clamp(4.5rem,11vw,8rem)] font-medium leading-none text-[var(--ink)]">
               SmartMenu
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-[#667267]">
+            <p className="mt-6 max-w-2xl font-display text-2xl italic leading-snug text-[var(--ink-soft)]">
               A multilingual QR menu and AI concierge that helps guests understand unfamiliar
               dishes, compare menu styles, and choose confidently without weakening allergen
               safety.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <Link href={`/r/${demoRestaurantCards[0].slug}`}>
-                <Button className="bg-[#263b2e] text-white hover:bg-[#1b2b21]">
-                  <QrCode data-icon="inline-start" />
-                  Open guest showcase
-                </Button>
-              </Link>
-              <Link href={`/dashboard/restaurants/${demoRestaurantCards[0].id}/menu`}>
-                <Button variant="outline">
-                  <ExternalLink data-icon="inline-start" />
-                  Open manager demo
-                </Button>
-              </Link>
+            <div className="mt-8 flex flex-wrap gap-2">
+              <Button size="lg" render={<Link href={`/r/${featured.slug}`} />}>
+                <QrCode data-icon="inline-start" />
+                Open guest showcase
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                render={<Link href={`/dashboard/restaurants/${featured.id}/menu`} />}
+              >
+                <ExternalLink data-icon="inline-start" />
+                Open manager demo
+              </Button>
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3">
             {[
               {
-                title: "Two menu modes",
-                description: "Switch between photo cards and an interactive printed-menu view.",
-                icon: BookOpen,
+                label: "Menu modes",
+                value: "02",
+                description: "Photo cards and a typeset classic menu.",
               },
               {
-                title: "Visible AI concierge",
-                description: "Guests can ask what to order from the hero, sidebar, or floating widget.",
-                icon: Sparkles,
+                label: "Languages",
+                value: "09",
+                description: "Guest copy and concierge prompts localized.",
               },
               {
-                title: "Rich dish context",
-                description: "Origin, taste, spice, ingredients, allergens, and pairings are structured.",
-                icon: BarChart3,
+                label: "Safety",
+                value: "Staff",
+                description: "Allergen copy always points back to staff confirmation.",
               },
-            ].map((item) => {
-              const Icon = item.icon;
-              return (
-                <Card key={item.title} className="border-0 bg-white/80 shadow-sm ring-1 ring-black/5">
-                  <CardHeader>
-                    <Icon className="mb-2 text-[#c5531b]" />
-                    <CardTitle>{item.title}</CardTitle>
-                    <CardDescription>{item.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent />
-                </Card>
-              );
-            })}
+            ].map((item) => (
+              <SmartSurface key={item.label} className="p-5">
+                <SmartEyebrow className="text-[var(--muted)]">{item.label}</SmartEyebrow>
+                <div className="mt-4 font-display text-4xl font-semibold leading-none">
+                  {item.value}
+                </div>
+                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.description}</p>
+              </SmartSurface>
+            ))}
           </div>
         </div>
 
-        <section>
-          <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <section className="grid gap-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-2xl font-semibold tracking-normal text-[#172018]">
-                Explore four restaurant demos
+              <SmartEyebrow>Restaurant demos</SmartEyebrow>
+              <h2 className="mt-3 font-display text-5xl font-medium leading-none">
+                Four menus, one system
               </h2>
-              <p className="mt-1 max-w-2xl text-sm leading-6 text-[#667267]">
-                Each concept uses the same reusable menu components but has its own cuisine,
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--muted)]">
+                Each concept uses the same reusable menu components with its own cuisine,
                 colors, ingredients, dish explanations, and guest recommendation flow.
               </p>
             </div>
-            <Badge variant="outline" className="w-fit bg-white/70">
-              Photo view + real-menu view
-            </Badge>
+            <SmartBadge variant="outline">Menu + editor</SmartBadge>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2">
             {demoRestaurantCards.map((restaurant) => (
-              <Card
+              <article
                 key={restaurant.slug}
-                className="overflow-hidden border-0 bg-white shadow-sm ring-1 ring-black/5"
+                className="group grid overflow-hidden rounded-[var(--radius-lg)] bg-[var(--paper)] shadow-[var(--shadow-rest),var(--ring-hairline)] sm:grid-cols-[0.92fr_1.08fr]"
+                style={{
+                  "--accent": restaurant.theme.accent,
+                  "--accent-dark": restaurant.theme.accentDark,
+                  "--accent-soft": restaurant.theme.accentSoft,
+                  "--secondary": restaurant.theme.secondary,
+                  "--secondary-soft": restaurant.theme.secondarySoft,
+                  "--theme-ink": restaurant.theme.ink,
+                  "--paper": restaurant.theme.paper,
+                } as CSSProperties}
               >
-                <div className="grid min-h-64 sm:grid-cols-[0.9fr_1.1fr]">
-                  <div className="relative min-h-48">
-                    {restaurant.heroImageUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={restaurant.heroImageUrl}
-                        alt=""
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                    ) : null}
-                    <div
-                      className="absolute inset-x-0 bottom-0 p-4 text-white"
-                      style={{
-                        background:
-                          "linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,0))",
-                      }}
-                    >
-                      <div className="font-mono text-xs">{restaurant.itemCount} dishes</div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-4 p-5">
-                    <div>
-                      <Badge
-                        className="mb-3 border-0 text-white"
-                        style={{ backgroundColor: restaurant.theme.accent }}
-                      >
-                        {restaurant.cuisine}
-                      </Badge>
-                      <CardTitle className="text-2xl">{restaurant.name}</CardTitle>
-                      <CardDescription className="mt-2 line-clamp-3">
-                        {restaurant.description}
-                      </CardDescription>
-                    </div>
-                    <div className="mt-auto grid gap-2 sm:grid-cols-3">
-                      <Link href={`/r/${restaurant.slug}?view=photo`}>
-                        <Button className="w-full" style={{ backgroundColor: restaurant.theme.accent, color: "white" }}>
-                          <Camera data-icon="inline-start" />
-                          Photo menu
-                        </Button>
-                      </Link>
-                      <Link href={`/r/${restaurant.slug}?view=classic`}>
-                        <Button variant="outline" className="w-full">
-                          <BookOpen data-icon="inline-start" />
-                          Real menu
-                        </Button>
-                      </Link>
-                      <Link href={`/dashboard/restaurants/${restaurant.id}/menu`}>
-                        <Button variant="secondary" className="w-full">
-                          <ExternalLink data-icon="inline-start" />
-                          Edit demo
-                        </Button>
-                      </Link>
-                    </div>
+                <div className="relative min-h-72 overflow-hidden bg-[var(--paper-warm)]">
+                  {restaurant.heroImageUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={restaurant.heroImageUrl}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover transition duration-[var(--dur-slow)] ease-[var(--ease-out-smooth)] group-hover:scale-[1.03]"
+                    />
+                  ) : null}
+                  <div
+                    className="absolute inset-x-0 bottom-0 p-5 text-white"
+                    style={{ background: "var(--scrim-bottom)" }}
+                  >
+                    <SmartPrice className="text-white" size="sm">
+                      {restaurant.itemCount} dishes
+                    </SmartPrice>
                   </div>
                 </div>
-              </Card>
+                <div className="flex flex-col gap-5 p-5">
+                  <div>
+                    <SmartEyebrow>
+                      {restaurant.cuisine} · {restaurant.city}
+                    </SmartEyebrow>
+                    <h3 className="mt-3 font-display text-4xl font-medium leading-none text-[var(--theme-ink)]">
+                      {restaurant.name}
+                    </h3>
+                    <p className="mt-3 line-clamp-4 text-sm leading-6 text-[var(--muted)]">
+                      {restaurant.description}
+                    </p>
+                  </div>
+                  <SmartHairline />
+                  <div className="mt-auto grid gap-2 sm:grid-cols-2">
+                    <Button render={<Link href={`/r/${restaurant.slug}?view=classic`} />}>
+                      <BookOpen data-icon="inline-start" />
+                      Menu
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      render={<Link href={`/dashboard/restaurants/${restaurant.id}/menu`} />}
+                    >
+                      <Sparkles data-icon="inline-start" />
+                      Edit
+                    </Button>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         </section>

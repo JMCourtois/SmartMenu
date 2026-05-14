@@ -37,7 +37,7 @@ export function MenuItemImageUploadForm({
     <form
       ref={formRef}
       encType="multipart/form-data"
-      className="mt-3 grid gap-2 rounded-xl bg-white p-2 md:grid-cols-[1fr_auto]"
+      className="mt-3 grid gap-2 rounded-[var(--radius-md)] bg-white p-2 shadow-[var(--ring-hairline)] md:grid-cols-[1fr_auto]"
       onSubmit={(event) => {
         event.preventDefault();
         const form = event.currentTarget;
@@ -94,7 +94,7 @@ export function MenuItemImageUploadForm({
           disabled={isPending}
           aria-label={`Upload image for ${itemName}`}
         />
-        <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+        <p className="mt-1 flex items-center gap-1.5 text-xs text-[var(--muted)]">
           <ImageIcon className="size-3.5" />
           {demoMode
             ? "Demo upload: saved in this browser and shown in menu previews."
@@ -104,7 +104,7 @@ export function MenuItemImageUploadForm({
           <p
             className={
               state.ok
-                ? "mt-1 text-xs font-medium text-emerald-700"
+                ? "mt-1 text-xs font-medium text-[var(--accent-dark)]"
                 : "mt-1 text-xs font-medium text-destructive"
             }
           >
@@ -117,7 +117,7 @@ export function MenuItemImageUploadForm({
         disabled={isPending}
         className={
           demoMode
-            ? "border-0 bg-emerald-700 text-white shadow-sm hover:bg-emerald-800"
+            ? "border-0 bg-[var(--accent-dark)] text-white hover:bg-[var(--accent)]"
             : undefined
         }
         variant={demoMode ? "default" : "outline"}

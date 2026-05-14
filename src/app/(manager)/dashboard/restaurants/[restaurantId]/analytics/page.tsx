@@ -37,7 +37,7 @@ export default async function AnalyticsPage({
   const maxTopItemCount = Math.max(...summary.topItems.map((item) => item.count), 1);
 
   return (
-    <main className="flex flex-col gap-5 p-4 sm:p-6">
+    <main className="flex flex-col gap-5">
       <ManagerPageHeader
         title="Guest analytics"
         description="Privacy-friendly first-party events that help operators decide what to translate, promote, clarify, and label."
@@ -85,9 +85,9 @@ export default async function AnalyticsPage({
       </section>
 
       <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="border-0 bg-white shadow-sm ring-1 ring-black/5">
+        <Card>
           <CardHeader>
-            <Languages className="text-sky-700" />
+            <Languages className="text-[var(--accent-dark)]" />
             <CardTitle>Top languages</CardTitle>
             <CardDescription>Guest-selected menu language.</CardDescription>
           </CardHeader>
@@ -103,9 +103,9 @@ export default async function AnalyticsPage({
                     </Badge>
                     <span className="font-mono text-sm">{language.count}</span>
                   </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-slate-100">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-[var(--paper-warm)]">
                     <div
-                      className="h-full rounded-full bg-sky-600"
+                      className="h-full rounded-full bg-[var(--accent)]"
                       style={{ width: `${(language.count / maxLanguageCount) * 100}%` }}
                     />
                   </div>
@@ -115,9 +115,9 @@ export default async function AnalyticsPage({
           </CardContent>
         </Card>
 
-        <Card className="border-0 bg-white shadow-sm ring-1 ring-black/5">
+        <Card>
           <CardHeader>
-            <MousePointerClick className="text-emerald-700" />
+            <MousePointerClick className="text-[var(--accent-dark)]" />
             <CardTitle>Top dishes</CardTitle>
             <CardDescription>Most opened item detail pages.</CardDescription>
           </CardHeader>
@@ -130,9 +130,9 @@ export default async function AnalyticsPage({
                   </span>
                   <span className="font-mono text-sm">{item.count}</span>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-slate-100">
+                <div className="h-1.5 overflow-hidden rounded-full bg-[var(--paper-warm)]">
                   <div
-                    className="h-full rounded-full bg-emerald-600"
+                    className="h-full rounded-full bg-[var(--accent)]"
                     style={{ width: `${(item.count / maxTopItemCount) * 100}%` }}
                   />
                 </div>
@@ -141,9 +141,9 @@ export default async function AnalyticsPage({
           </CardContent>
         </Card>
 
-        <Card className="border-0 bg-white shadow-sm ring-1 ring-black/5">
+        <Card>
           <CardHeader>
-            <Filter className="text-amber-700" />
+            <Filter className="text-[var(--secondary)]" />
             <CardTitle>Top filters</CardTitle>
             <CardDescription>Signals for menu labels and translations.</CardDescription>
           </CardHeader>
@@ -158,7 +158,7 @@ export default async function AnalyticsPage({
         </Card>
       </div>
 
-      <Card className="border-0 bg-slate-950 text-white shadow-sm">
+      <Card className="bg-[var(--ink)] text-white shadow-[var(--shadow-rest)]">
         <CardHeader>
           <CardTitle>Recommended actions</CardTitle>
           <CardDescription className="text-white/65">
@@ -166,13 +166,13 @@ export default async function AnalyticsPage({
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-3 md:grid-cols-3">
-          <div className="rounded-xl bg-white/[0.08] p-3 text-sm ring-1 ring-white/10">
+          <div className="rounded-[var(--radius-md)] bg-white/[0.08] p-3 text-sm ring-1 ring-white/10">
             Add visible no-pork labels to dishes guests filter for most.
           </div>
-          <div className="rounded-xl bg-white/[0.08] p-3 text-sm ring-1 ring-white/10">
+          <div className="rounded-[var(--radius-md)] bg-white/[0.08] p-3 text-sm ring-1 ring-white/10">
             Translate the top viewed dishes before translating long-tail items.
           </div>
-          <div className="rounded-xl bg-white/[0.08] p-3 text-sm ring-1 ring-white/10">
+          <div className="rounded-[var(--radius-md)] bg-white/[0.08] p-3 text-sm ring-1 ring-white/10">
             Review allergen notes on promoted dishes before increasing visibility.
           </div>
         </CardContent>

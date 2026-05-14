@@ -1,20 +1,23 @@
 "use client";
 
-import Link from "next/link";
-import { ChevronRight, Info, MessageCircle, ShieldAlert, Sparkles, ThermometerSun, Utensils } from "lucide-react";
+import { Info, ShieldAlert, Sparkles } from "lucide-react";
 
-import { MenuTagBadge } from "@/components/guest/MenuTagVisual";
-import { Badge } from "@/components/ui/badge";
+import { MenuTagIcon } from "@/components/guest/MenuTagVisual";
 import { Button } from "@/components/ui/button";
+import {
+  DotLeader,
+  SmartEyebrow,
+  SmartHairline,
+  SmartPrice,
+} from "@/components/smartmenu/primitives";
 import {
   formatLocalizedPrice,
   getGuestCopy,
   localizedCategoryName,
-  localizedCtaPrompts,
-  localizedDietaryTagName,
-  localizedItemField,
-  localizedIngredientLine,
   localizedDescription,
+  localizedDietaryTagName,
+  localizedIngredientLine,
+  localizedItemField,
   localizedName,
 } from "@/lib/guest-menu";
 import { cn } from "@/lib/utils";
@@ -29,20 +32,45 @@ type Props = {
   onAskAi: (question: string) => void;
 };
 
+function ClassicMeta({ item, locale }: { item: MenuItemView; locale: string }) {
+  const tags = [
+    ...(item.spiceLevel > 0 ? ["spicy"] : []),
+    ...item.dietaryTags.map((tag) => tag.code).filter((code) => code !== "traditional"),
+  ];
+
+  if (!tags.length) return null;
+
+  return (
+    <div className="mt-4 flex flex-wrap items-center gap-2 text-[10px] font-medium uppercase text-[var(--muted)]">
+      {tags.slice(0, 6).map((code, index) => {
+        const tag = item.dietaryTags.find((entry) => entry.code === code);
+
+        return (
+          <span key={`${code}-${index}`} className="inline-flex items-center gap-1.5">
+            {index > 0 ? (
+              <span aria-hidden="true" className="size-1 rounded-full bg-[var(--hairline)]" />
+            ) : null}
+            <MenuTagIcon code={code} className="size-4 border-0 bg-transparent text-current" />
+            {tag ? localizedDietaryTagName(tag, locale) : code}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
 function ClassicMenuRow({
   item,
   menu,
   locale,
-  onTrack,
   onSelectItem,
-  onAskAi,
+  last,
 }: {
   item: MenuItemView;
   menu: RestaurantMenuView;
   locale: string;
-  onTrack: Props["onTrack"];
   onSelectItem: (item: MenuItemView) => void;
-  onAskAi: (question: string) => void;
+  last: boolean;
 }) {
   const warning = item.allergens.some((allergen) => allergen.verificationStatus !== "VERIFIED");
   const copy = getGuestCopy(locale);
@@ -50,92 +78,56 @@ function ClassicMenuRow({
   return (
     <article
       className={cn(
-        "grid gap-3 border-b border-dashed py-5 last:border-0 md:grid-cols-[1fr_auto]",
+        "cursor-pointer py-6 transition-opacity hover:opacity-95",
+        !last && "border-b border-[var(--hairline-soft)]",
         !item.isAvailable && "opacity-55",
       )}
-      style={{ borderColor: "color-mix(in srgb, var(--menu-accent) 22%, transparent)" }}
+      onClick={() => onSelectItem(item)}
     >
-      <div className="min-w-0">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-xl font-semibold tracking-normal" style={{ color: "var(--menu-ink)" }}>
-            {localizedName(item, locale)}
-          </h3>
-          {item.isPromoted ? (
-            <Badge className="border-0 text-white" style={{ backgroundColor: "var(--menu-secondary)" }}>
-              <Sparkles data-icon="inline-start" />
-              {copy.promoted}
-            </Badge>
-          ) : null}
-          {!item.isAvailable ? <Badge variant="destructive">{copy.unavailable}</Badge> : null}
-        </div>
-        <p className="mt-1 max-w-3xl text-sm leading-6" style={{ color: "var(--menu-muted)" }}>
-          {localizedDescription(item, locale)}
-        </p>
-        <p className="mt-2 flex max-w-3xl items-start gap-1.5 text-xs leading-5 text-foreground/70">
-          <Utensils className="mt-0.5 size-3.5 shrink-0" style={{ color: "var(--menu-secondary)" }} />
-          <span>
-            <span className="font-semibold">{copy.ingredientsPrefix}:</span>{" "}
-            {localizedIngredientLine(item, locale)}
-          </span>
-        </p>
-        <p className="mt-2 max-w-3xl text-xs leading-5 text-foreground/65">
-          {localizedItemField(item, locale, "explanation")}
-        </p>
-        <div className="mt-3 flex flex-wrap items-center gap-2">
-          {item.dietaryTags.slice(0, 5).map((tag) => (
-            <MenuTagBadge
-              key={tag.code}
-              code={tag.code}
-              label={localizedDietaryTagName(tag, locale)}
-            />
-          ))}
-          {item.spiceLevel > 0 ? (
-            <span className="inline-flex items-center gap-1.5 text-xs">
-              <ThermometerSun className="size-4" style={{ color: "var(--menu-secondary)" }} />
-              {copy.spiceLevel} {item.spiceLevel}/5
-            </span>
-          ) : null}
-          {warning ? (
-            <span className="inline-flex items-center gap-1.5 text-xs text-destructive">
-              <ShieldAlert className="size-4" />
-              {copy.askStaff}
-            </span>
-          ) : null}
-        </div>
+      {item.isPromoted ? (
+        <SmartEyebrow className="mb-2 text-[var(--secondary)]">
+          {copy.promoted}
+        </SmartEyebrow>
+      ) : null}
+
+      <div className="flex items-baseline gap-0">
+        <h3 className="text-balance font-display text-2xl font-medium leading-tight text-[var(--ink)]">
+          {localizedName(item, locale)}
+        </h3>
+        <DotLeader />
+        <SmartPrice size="lg">
+          {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
+        </SmartPrice>
       </div>
 
-      <div className="flex items-center justify-between gap-3 md:min-w-48 md:flex-col md:items-end md:justify-start">
-        <div className="font-mono text-lg font-semibold" style={{ color: "var(--menu-accent-dark)" }}>
-          {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
-        </div>
-        <div className="flex flex-wrap justify-end gap-2">
-          <Button variant="outline" size="sm" onClick={() => onSelectItem(item)}>
-            <Info data-icon="inline-start" />
-            {copy.info}
-          </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={() =>
-              onAskAi(
-                localizedCtaPrompts(item, locale)[1] ??
-                  copy.ai.demoPrompts[0]?.prompt ??
-                  copy.getRecommendation,
-              )
-            }
-          >
-            <MessageCircle data-icon="inline-start" />
-            {copy.guideMe}
-          </Button>
-        </div>
-        <Link
-          href={`/r/${menu.restaurant.slug}/item/${item.slug}`}
-          className="hidden items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground md:inline-flex"
-          onClick={() => onTrack("ITEM_VIEWED", { itemSlug: item.slug })}
-        >
+      <p className="mt-2 max-w-2xl font-display text-base italic leading-relaxed text-[var(--ink-soft)]">
+        {localizedDescription(item, locale)}
+      </p>
+      <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--muted)]">
+        {localizedIngredientLine(item, locale)}.
+      </p>
+      {localizedItemField(item, locale, "explanation") ? (
+        <p className="mt-2 max-w-2xl text-xs leading-5 text-[var(--muted)]">
+          {localizedItemField(item, locale, "explanation")}
+        </p>
+      ) : null}
+
+      <ClassicMeta item={item} locale={locale} />
+      {warning ? (
+        <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-[var(--danger)]">
+          <ShieldAlert className="size-4" />
+          {copy.askStaff}
+        </p>
+      ) : null}
+
+      <div
+        className="mt-4 flex flex-wrap gap-2"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <Button variant="outline" size="sm" onClick={() => onSelectItem(item)}>
+          <Info data-icon="inline-start" />
           {copy.info}
-          <ChevronRight data-icon="inline-end" />
-        </Link>
+        </Button>
       </div>
     </article>
   );
@@ -145,71 +137,65 @@ export function ClassicMenuView({
   categories,
   menu,
   locale,
-  onTrack,
   onSelectItem,
   onAskAi,
 }: Props) {
   const copy = getGuestCopy(locale);
 
   return (
-    <div
-      className="rounded-[2rem] border p-4 shadow-sm sm:p-8"
-      style={{
-        backgroundColor: "var(--menu-paper)",
-        borderColor: "color-mix(in srgb, var(--menu-accent) 18%, transparent)",
-      }}
-    >
-      <div className="mb-8 flex flex-col gap-3 border-b pb-6 text-center"
-        style={{ borderColor: "color-mix(in srgb, var(--menu-accent) 25%, transparent)" }}
-      >
-        <div className="font-mono text-xs uppercase tracking-[0.18em]" style={{ color: "var(--menu-secondary)" }}>
-          {copy.classicView}
-        </div>
-        <h2 className="text-3xl font-semibold tracking-normal" style={{ color: "var(--menu-ink)" }}>
-          {menu.restaurant.name}
-        </h2>
-        <p className="mx-auto max-w-2xl text-sm leading-6" style={{ color: "var(--menu-muted)" }}>
-          {copy.classicViewDescription}
-        </p>
-      </div>
-
-      <div className="grid gap-10">
-        {categories.map((category) => (
-          <section key={category.id} id={category.id} className="scroll-mt-28">
-            <div className="mb-2 flex items-end justify-between gap-4">
-              <h3 className="font-serif text-2xl font-semibold tracking-normal" style={{ color: "var(--menu-accent-dark)" }}>
-                {localizedCategoryName(category, locale)}
-              </h3>
-              <div className="h-px flex-1" style={{ backgroundColor: "color-mix(in srgb, var(--menu-accent) 22%, transparent)" }} />
-              <span className="font-mono text-xs" style={{ color: "var(--menu-muted)" }}>
-                {String(category.items.length).padStart(2, "0")}
-              </span>
-            </div>
-            <div>
-              {category.items.map((item) => (
-                <ClassicMenuRow
-                  key={item.id}
-                  item={item}
-                  menu={menu}
-                  locale={locale}
-                  onTrack={onTrack}
-                  onSelectItem={onSelectItem}
-                  onAskAi={onAskAi}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
+    <div className="mx-auto max-w-3xl">
+      {categories.map((category, categoryIndex) => (
+        <section
+          key={category.id}
+          id={category.id}
+          className={cn("scroll-mt-24", categoryIndex > 0 && "mt-16")}
+        >
+          <header className="mb-6 flex items-baseline gap-5">
+            <h2 className="whitespace-nowrap font-display text-3xl font-medium leading-none text-[var(--ink)]">
+              {localizedCategoryName(category, locale)}
+            </h2>
+            <SmartHairline />
+            <SmartEyebrow className="text-[var(--muted)]">
+              {String(category.items.length).padStart(2, "0")}
+            </SmartEyebrow>
+          </header>
+          <div>
+            {category.items.map((item, itemIndex) => (
+              <ClassicMenuRow
+                key={item.id}
+                item={item}
+                menu={menu}
+                locale={locale}
+                onSelectItem={onSelectItem}
+                last={itemIndex === category.items.length - 1}
+              />
+            ))}
+          </div>
+        </section>
+      ))}
 
       {categories.length === 0 ? (
-        <div className="rounded-2xl border border-dashed bg-white/50 p-8 text-center">
-          <p className="font-medium">{copy.noDishesTitle}</p>
-          <p className="mt-1 text-sm text-muted-foreground">
+        <div className="py-16 text-center">
+          <h2 className="font-display text-3xl font-semibold text-[var(--ink)]">
+            {copy.noDishesTitle}
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
             {copy.noDishesDescription}
           </p>
+          <Button
+            className="mt-5"
+            onClick={() => onAskAi(copy.ai.demoPrompts[0]?.prompt ?? copy.getRecommendation)}
+          >
+            <Sparkles data-icon="inline-start" />
+            {copy.getRecommendation}
+          </Button>
         </div>
-      ) : null}
+      ) : (
+        <footer className="mt-20 flex flex-col gap-2 border-t border-[var(--hairline)] pt-6 font-price text-[10px] uppercase text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
+          <span>Prices in {menu.restaurant.currency}</span>
+          <span>{copy.safetyNotice}</span>
+        </footer>
+      )}
     </div>
   );
 }

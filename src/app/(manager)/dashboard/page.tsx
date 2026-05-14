@@ -15,8 +15,8 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-semibold">No restaurants yet</h1>
+    <main className="rounded-[var(--radius-lg)] bg-white p-6 shadow-[var(--shadow-rest),var(--ring-hairline)]">
+      <h1 className="font-display text-4xl font-semibold">No restaurants yet</h1>
     </main>
   );
 }

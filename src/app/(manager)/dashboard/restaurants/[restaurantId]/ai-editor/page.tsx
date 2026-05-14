@@ -83,7 +83,7 @@ export default async function AiEditorPage({
   ).length;
 
   return (
-    <main className="flex flex-col gap-5 p-4 sm:p-6">
+    <main className="flex flex-col gap-5">
       <ManagerPageHeader
         title="AI menu editor"
         description="Use AI for translations, rewrites, pairings, and missing-field checks. Every output becomes a reviewable proposal against the draft."
@@ -118,7 +118,7 @@ export default async function AiEditorPage({
       </section>
 
       <div className="grid gap-4 xl:grid-cols-[1fr_340px]">
-        <Card className="border-0 bg-white shadow-sm ring-1 ring-black/5">
+        <Card>
           <CardHeader>
             <CardTitle>Generate proposal</CardTitle>
             <CardDescription>
@@ -134,9 +134,9 @@ export default async function AiEditorPage({
                 "Find dishes missing allergen or dietary verification notes.",
                 "Suggest pairings and promoted vegetarian dishes for tonight.",
               ].map((prompt) => (
-                <div key={prompt} className="rounded-2xl border bg-slate-50 p-3">
+                <div key={prompt} className="rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
                   <div className="mb-2 flex items-center gap-2 text-sm font-semibold">
-                    <WandSparkles className="size-4 text-violet-700" />
+                    <WandSparkles className="size-4 text-[var(--secondary)]" />
                     Prompt shortcut
                   </div>
                   <p className="text-sm leading-6 text-muted-foreground">{prompt}</p>
@@ -186,7 +186,7 @@ export default async function AiEditorPage({
       </div>
 
       {isDemo ? (
-        <Alert className="border-amber-200 bg-amber-50 text-amber-950">
+        <Alert className="border-[var(--hairline)] bg-[var(--secondary-soft)] text-[var(--accent-dark)]">
           <AlertTriangle />
           <AlertTitle>Demo mode</AlertTitle>
           <AlertDescription>
@@ -198,8 +198,8 @@ export default async function AiEditorPage({
 
       <section className="flex flex-col gap-4">
         {changeSets.map((changeSet) => (
-          <Card key={changeSet.id} className="overflow-hidden border-0 bg-white shadow-sm ring-1 ring-black/5">
-            <CardHeader className="border-b bg-linear-to-r from-violet-50 to-white">
+          <Card key={changeSet.id} className="overflow-hidden">
+            <CardHeader className="border-b border-[var(--hairline-soft)] bg-[var(--paper-warm)]">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
@@ -207,7 +207,7 @@ export default async function AiEditorPage({
                     <Badge variant={riskVariant(changeSet.riskLevel)}>
                       {changeSet.riskLevel}
                     </Badge>
-                    <Badge className="border-0 bg-slate-900 text-white">{changeSet.status}</Badge>
+                    <Badge>{changeSet.status}</Badge>
                   </div>
                   <CardDescription className="mt-2">{changeSet.prompt}</CardDescription>
                 </div>
@@ -261,7 +261,7 @@ export default async function AiEditorPage({
 
               <div className="grid gap-3">
                 {changeSet.changes.map((change) => (
-                  <div key={change.id} className="rounded-xl border bg-slate-50 p-3">
+                  <div key={change.id} className="rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="outline">{change.entityType}</Badge>
                       <Badge variant="secondary">{change.operation}</Badge>
@@ -269,10 +269,10 @@ export default async function AiEditorPage({
                     </div>
                     <p className="mt-2 text-sm text-muted-foreground">{change.reason}</p>
                     <div className="mt-3 grid gap-3 md:grid-cols-2">
-                      <pre className="max-h-60 overflow-auto rounded-lg bg-white p-3 text-xs ring-1 ring-black/5">
+                      <pre className="max-h-60 overflow-auto rounded-[var(--radius-sm)] bg-white p-3 text-xs shadow-[var(--ring-hairline)]">
                         {renderValue(change.oldValue)}
                       </pre>
-                      <pre className="max-h-60 overflow-auto rounded-lg bg-emerald-50 p-3 text-xs ring-1 ring-emerald-900/10">
+                      <pre className="max-h-60 overflow-auto rounded-[var(--radius-sm)] bg-[var(--accent-soft)] p-3 text-xs shadow-[var(--ring-hairline)]">
                         {renderValue(change.newValue)}
                       </pre>
                     </div>

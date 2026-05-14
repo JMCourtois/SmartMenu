@@ -1,19 +1,17 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { CSSProperties } from "react";
 import { ArrowLeft, BadgeCheck, Flame, Info, ShieldAlert, Soup, Utensils } from "lucide-react";
 
 import { MenuTagBadge } from "@/components/guest/MenuTagVisual";
 import { DemoAwareMenuItemImage } from "@/components/menu/DemoAwareMenuItemImage";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  SmartEyebrow,
+  SmartMenuLogo,
+  SmartPrice,
+  SmartSurface,
+  getSmartMenuThemeStyle,
+} from "@/components/smartmenu/primitives";
 import {
   formatLocalizedPrice,
   getGuestCopy,
@@ -44,102 +42,112 @@ export default async function GuestMenuItemPage({
   const locale = menu.restaurant.defaultLocale;
   const copy = getGuestCopy(locale);
   const ingredients = localizedIngredients(item, locale);
-  const themeStyle = {
-    "--menu-accent": menu.restaurant.theme.accent,
-    "--menu-accent-dark": menu.restaurant.theme.accentDark,
-    "--menu-accent-soft": menu.restaurant.theme.accentSoft,
-    "--menu-secondary": menu.restaurant.theme.secondary,
-    "--menu-secondary-soft": menu.restaurant.theme.secondarySoft,
-    "--menu-ink": menu.restaurant.theme.ink,
-    "--menu-paper": menu.restaurant.theme.paper,
-    "--menu-muted": menu.restaurant.theme.muted,
-  } as CSSProperties;
+  const themeStyle = getSmartMenuThemeStyle(menu.restaurant.theme);
 
   return (
-    <main className="min-h-screen" style={{ ...themeStyle, backgroundColor: "var(--menu-paper)" }}>
-      <div className="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-6 sm:px-6 lg:px-8">
-        <Link href={`/r/${restaurantSlug}`} className="w-fit">
-          <Button variant="ghost">
+    <main
+      className="min-h-screen bg-[var(--paper-light)] text-[var(--ink)]"
+      style={themeStyle}
+    >
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-4">
+          <SmartMenuLogo sublabel={menu.restaurant.name} />
+          <Button variant="ghost" render={<Link href={`/r/${restaurantSlug}`} />}>
             <ArrowLeft data-icon="inline-start" />
             {copy.openMenu}
           </Button>
-        </Link>
+        </div>
 
-        <Card className="overflow-hidden border-0 shadow-sm ring-1 ring-black/5">
-          <DemoAwareMenuItemImage
-            restaurantSlug={menu.restaurant.slug}
-            itemId={item.id}
-            itemName={localizedName(item, locale)}
-            fallbackUrl={item.imageUrl}
-            className="h-72 w-full"
-          />
-          <CardHeader>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <CardTitle className="text-3xl">{localizedName(item, locale)}</CardTitle>
-                <CardDescription className="mt-2 max-w-2xl text-base leading-7">
-                  {localizedDescription(item, locale)}
-                </CardDescription>
-              </div>
-              <div className="font-mono text-lg font-semibold">
-                {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
-              </div>
+        <article className="overflow-hidden rounded-[28px] bg-[var(--paper)] shadow-[var(--shadow-overlay)]">
+          <div className="relative min-h-[420px]">
+            <DemoAwareMenuItemImage
+              restaurantSlug={menu.restaurant.slug}
+              itemId={item.id}
+              itemName={localizedName(item, locale)}
+              fallbackUrl={item.imageUrl}
+              className="absolute inset-0 h-full w-full"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: "var(--scrim-bottom)" }}
+            />
+            <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
+              <SmartEyebrow className="text-white/75">
+                {menu.restaurant.name}
+              </SmartEyebrow>
+              <h1 className="mt-3 max-w-3xl font-display text-5xl font-semibold leading-none sm:text-6xl">
+                {localizedName(item, locale)}
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-white/90">
+                {localizedDescription(item, locale)}
+              </p>
+              <span className="mt-5 inline-flex rounded-full bg-white/95 px-4 py-2 text-[var(--ink)]">
+                <SmartPrice>
+                  {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
+                </SmartPrice>
+              </span>
             </div>
-          </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-2">
-            <section className="rounded-lg border p-4 md:col-span-2" style={{ backgroundColor: "var(--menu-accent-soft)" }}>
-              <div className="mb-3 flex items-center gap-2 font-medium">
-                <Info />
+          </div>
+
+          <div className="grid gap-4 p-5 sm:p-7 md:grid-cols-2">
+            <SmartSurface className="p-5 md:col-span-2">
+              <div className="mb-3 flex items-center gap-2 font-semibold">
+                <Info className="size-4 text-[var(--accent-dark)]" />
                 {copy.explanation}
               </div>
-              <p className="text-sm leading-6 text-foreground/80">
+              <p className="text-sm leading-6 text-[var(--muted)]">
                 {localizedItemField(item, locale, "explanation")}
               </p>
-              <div className="mt-4 grid gap-3 md:grid-cols-3">
+              <div className="mt-5 grid gap-4 md:grid-cols-3">
                 <div>
-                  <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase text-muted-foreground">
-                    <Soup className="size-4" />
+                  <SmartEyebrow className="mb-2 text-[var(--muted)]">
+                    <Soup className="mr-1 inline size-3.5" />
                     {copy.origin}
-                  </div>
-                  <p className="text-sm">{localizedItemField(item, locale, "origin")}</p>
+                  </SmartEyebrow>
+                  <p className="text-sm leading-6">{localizedItemField(item, locale, "origin")}</p>
                 </div>
                 <div>
-                  <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase text-muted-foreground">
-                    <Utensils className="size-4" />
+                  <SmartEyebrow className="mb-2 text-[var(--muted)]">
+                    <Utensils className="mr-1 inline size-3.5" />
                     {copy.tasteProfile}
-                  </div>
-                  <p className="text-sm">{localizedItemField(item, locale, "tasteProfile")}</p>
+                  </SmartEyebrow>
+                  <p className="text-sm leading-6">
+                    {localizedItemField(item, locale, "tasteProfile")}
+                  </p>
                 </div>
                 <div>
-                  <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase text-muted-foreground">
-                    <Flame className="size-4" />
+                  <SmartEyebrow className="mb-2 text-[var(--muted)]">
+                    <Flame className="mr-1 inline size-3.5" />
                     {copy.spiceLevel}
-                  </div>
-                  <p className="text-sm">{item.spiceLevel}/5</p>
+                  </SmartEyebrow>
+                  <p className="font-price text-sm font-semibold">{item.spiceLevel}/5</p>
                 </div>
               </div>
-            </section>
+            </SmartSurface>
 
-            <section className="rounded-lg border p-4">
-              <div className="mb-3 flex items-center gap-2 font-medium">
-                <Utensils />
+            <SmartSurface className="p-5">
+              <div className="mb-3 flex items-center gap-2 font-semibold">
+                <Utensils className="size-4 text-[var(--secondary)]" />
                 {copy.ingredients}
               </div>
               <div className="flex flex-wrap gap-2">
                 {ingredients.map((ingredient) => (
-                  <Badge key={ingredient} variant="outline">
+                  <span
+                    key={ingredient}
+                    className="inline-flex min-h-7 items-center rounded-full border border-[var(--hairline)] bg-white px-3 text-xs text-[var(--ink-soft)]"
+                  >
                     {ingredient}
-                  </Badge>
+                  </span>
                 ))}
               </div>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              <p className="mt-4 text-sm leading-6 text-[var(--muted)]">
                 {localizedItemField(item, locale, "preparation")}
               </p>
-            </section>
+            </SmartSurface>
 
-            <section className="rounded-lg border p-4">
-              <div className="mb-3 flex items-center gap-2 font-medium">
-                <BadgeCheck />
+            <SmartSurface className="p-5">
+              <div className="mb-3 flex items-center gap-2 font-semibold">
+                <BadgeCheck className="size-4 text-[var(--accent-dark)]" />
                 {copy.dietary}
               </div>
               <div className="flex flex-wrap gap-2">
@@ -151,40 +159,34 @@ export default async function GuestMenuItemPage({
                   />
                 ))}
               </div>
-            </section>
+            </SmartSurface>
 
-            <section className="rounded-lg border p-4">
-              <div className="mb-3 flex items-center gap-2 font-medium">
-                <ShieldAlert />
+            <section className="rounded-[var(--radius-lg)] bg-[var(--danger-soft)] p-5 shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--danger)_18%,transparent)]">
+              <div className="mb-3 flex items-center gap-2 font-semibold text-[var(--danger)]">
+                <ShieldAlert className="size-4" />
                 {copy.allergens}
               </div>
               <div className="flex flex-col gap-2">
                 {item.allergens.map((allergen) => (
-                  <div key={allergen.code} className="rounded-lg bg-muted p-3 text-sm">
+                  <div key={allergen.code} className="rounded-[var(--radius-sm)] bg-white p-3 text-sm">
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-medium">{localizedAllergenName(allergen, locale)}</span>
-                      <Badge
-                        variant={
-                          allergen.verificationStatus === "VERIFIED"
-                            ? "secondary"
-                            : "destructive"
-                        }
-                      >
+                      <span className="font-price text-[10px] uppercase text-[var(--muted)]">
                         {allergen.status.replaceAll("_", " ")}
-                      </Badge>
+                      </span>
                     </div>
                     {allergen.note ? (
-                      <p className="mt-1 text-xs text-muted-foreground">{allergen.note}</p>
+                      <p className="mt-1 text-xs leading-5 text-[var(--muted)]">{allergen.note}</p>
                     ) : null}
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-xs text-muted-foreground">
+              <p className="mt-3 text-xs leading-5 text-[var(--muted)]">
                 {copy.safetyNotice}
               </p>
             </section>
-          </CardContent>
-        </Card>
+          </div>
+        </article>
       </div>
     </main>
   );

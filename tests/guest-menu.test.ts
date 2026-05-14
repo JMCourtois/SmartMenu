@@ -96,7 +96,7 @@ describe("guest menu views and filters", () => {
       expect(copy.ai.demoPrompts).toHaveLength(5);
       expect(copy.intents.vegetarian).toBeTruthy();
     }
-    expect(getGuestCopy("en").getRecommendation).toBe("Get a recommendation");
+    expect(getGuestCopy("en").getRecommendation).toBe("Recommend me");
     expect(getGuestCopy("en").getRecommendation).not.toBe("Ask AI what to order");
   });
 
