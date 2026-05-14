@@ -108,9 +108,9 @@ export function DishInfoDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[92vh] overflow-hidden rounded-[28px] bg-[var(--paper)] p-0 shadow-[var(--shadow-overlay)] ring-0 sm:max-w-5xl">
-        <div className="grid max-h-[92vh] overflow-y-auto md:grid-cols-[0.95fr_1.05fr]">
-          <div className="relative min-h-80 bg-[var(--ink)] md:min-h-full">
+      <DialogContent className="max-h-[100dvh] overflow-hidden rounded-none bg-[var(--paper)] p-0 shadow-[var(--shadow-overlay)] ring-0 sm:max-h-[92vh] sm:rounded-[28px] sm:max-w-5xl">
+        <div className="grid max-h-[100dvh] overflow-y-auto sm:max-h-[92vh] md:grid-cols-[0.95fr_1.05fr]">
+          <div className="relative min-h-72 bg-[var(--ink)] sm:min-h-80 md:min-h-full">
             {item.imageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -123,22 +123,22 @@ export function DishInfoDialog({
               className="absolute inset-0"
               style={{ background: "var(--scrim-bottom)" }}
             />
-            <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
+            <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-8">
               <span className="mb-4 inline-flex rounded-full bg-white/95 px-4 py-2 text-[var(--ink)]">
                 <SmartPrice>
                   {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
                 </SmartPrice>
               </span>
-              <h2 className="font-display text-4xl font-semibold leading-none sm:text-5xl">
+              <h2 className="text-balance font-display text-3xl font-semibold leading-none sm:text-5xl">
                 {localizedName(item, locale)}
               </h2>
-              <p className="mt-3 max-w-md text-sm leading-6 text-white/90">
+              <p className="mt-3 line-clamp-3 max-w-md text-sm leading-6 text-white/90 sm:line-clamp-none">
                 {localizedDescription(item, locale)}
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 p-5 sm:p-7">
+          <div className="flex min-w-0 flex-col gap-4 p-4 sm:p-7">
             <DialogHeader className="sr-only">
               <DialogTitle>{localizedName(item, locale)}</DialogTitle>
               <DialogDescription>{localizedDescription(item, locale)}</DialogDescription>
@@ -189,7 +189,7 @@ export function DishInfoDialog({
               title={copy.dietary}
               icon={<Flame className="size-4 text-[var(--secondary)]" />}
             >
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                 <span className="text-xs font-medium text-[var(--ink-soft)]">
                   {copy.spiceLevel}
                 </span>
@@ -216,9 +216,9 @@ export function DishInfoDialog({
                   item.allergens.map((allergen) => (
                     <div
                       key={allergen.code}
-                      className="rounded-[var(--radius-sm)] bg-white p-3 text-xs shadow-[var(--ring-hairline)]"
+                      className="min-w-0 rounded-[var(--radius-sm)] bg-white p-3 text-xs shadow-[var(--ring-hairline)]"
                     >
-                      <div className="flex items-center justify-between gap-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3">
                         <span className="font-medium text-[var(--ink)]">
                           {localizedAllergenName(allergen, locale)}
                         </span>

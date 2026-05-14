@@ -18,34 +18,35 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[var(--paper-light)] text-[var(--ink)]">
-      <section className="mx-auto flex max-w-7xl flex-col gap-14 px-4 py-6 sm:px-6 lg:px-10">
-        <header className="flex items-center justify-between gap-4">
+      <section className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-5 sm:gap-14 sm:px-6 sm:py-6 lg:px-10">
+        <header className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           <SmartMenuLogo sublabel="Restaurant menus" />
-          <Button variant="outline" render={<Link href={`/r/${featured.slug}`} />}>
+          <Button className="w-full sm:w-auto" variant="outline" render={<Link href={`/r/${featured.slug}`} />}>
             <QrCode data-icon="inline-start" />
             Open guest showcase
           </Button>
         </header>
 
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div className="grid gap-7 sm:gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div className="max-w-3xl">
             <SmartEyebrow>QR menu · AI concierge</SmartEyebrow>
-            <h1 className="mt-5 text-balance font-display text-[clamp(4.5rem,11vw,8rem)] font-medium leading-none text-[var(--ink)]">
+            <h1 className="mt-4 text-balance font-display text-[clamp(3rem,18vw,5rem)] font-medium leading-none text-[var(--ink)] sm:mt-5 lg:text-[clamp(4.5rem,11vw,8rem)]">
               SmartMenu
             </h1>
-            <p className="mt-6 max-w-2xl font-display text-2xl italic leading-snug text-[var(--ink-soft)]">
+            <p className="mt-4 max-w-2xl font-display text-xl italic leading-snug text-[var(--ink-soft)] sm:mt-6 sm:text-2xl">
               A multilingual QR menu and AI concierge that helps guests understand unfamiliar
               dishes, compare menu styles, and choose confidently without weakening allergen
               safety.
             </p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              <Button size="lg" render={<Link href={`/r/${featured.slug}`} />}>
+            <div className="mt-6 grid gap-2 sm:mt-8 sm:flex sm:flex-wrap">
+              <Button size="lg" className="w-full sm:w-auto" render={<Link href={`/r/${featured.slug}`} />}>
                 <QrCode data-icon="inline-start" />
                 Open guest showcase
               </Button>
               <Button
                 size="lg"
                 variant="outline"
+                className="w-full sm:w-auto"
                 render={<Link href={`/dashboard/restaurants/${featured.id}/menu`} />}
               >
                 <ExternalLink data-icon="inline-start" />
@@ -54,7 +55,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
             {[
               {
                 label: "Menu modes",
@@ -74,7 +75,7 @@ export default function Home() {
             ].map((item) => (
               <SmartSurface key={item.label} className="p-5">
                 <SmartEyebrow className="text-[var(--muted)]">{item.label}</SmartEyebrow>
-                <div className="mt-4 font-display text-4xl font-semibold leading-none">
+                <div className="mt-3 font-display text-3xl font-semibold leading-none sm:mt-4 sm:text-4xl">
                   {item.value}
                 </div>
                 <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.description}</p>
@@ -87,7 +88,7 @@ export default function Home() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <SmartEyebrow>Restaurant demos</SmartEyebrow>
-              <h2 className="mt-3 font-display text-5xl font-medium leading-none">
+              <h2 className="mt-3 font-display text-4xl font-medium leading-none sm:text-5xl">
                 Four menus, one system
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--muted)]">
@@ -98,11 +99,11 @@ export default function Home() {
             <SmartBadge variant="outline">Menu + editor</SmartBadge>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 md:gap-8">
             {demoRestaurantCards.map((restaurant) => (
               <article
                 key={restaurant.slug}
-                className="group grid overflow-hidden rounded-[var(--radius-lg)] bg-[var(--paper)] shadow-[var(--shadow-rest),var(--ring-hairline)] sm:grid-cols-[0.92fr_1.08fr]"
+                className="group grid min-w-0 overflow-hidden rounded-[var(--radius-lg)] bg-[var(--paper)] shadow-[var(--shadow-rest),var(--ring-hairline)] md:grid-cols-[0.92fr_1.08fr]"
                 style={{
                   "--accent": restaurant.theme.accent,
                   "--accent-dark": restaurant.theme.accentDark,
@@ -113,7 +114,7 @@ export default function Home() {
                   "--paper": restaurant.theme.paper,
                 } as CSSProperties}
               >
-                <div className="relative min-h-72 overflow-hidden bg-[var(--paper-warm)]">
+                <div className="relative aspect-[4/3] overflow-hidden bg-[var(--paper-warm)] md:min-h-72 md:aspect-auto">
                   {restaurant.heroImageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -131,12 +132,12 @@ export default function Home() {
                     </SmartPrice>
                   </div>
                 </div>
-                <div className="flex flex-col gap-5 p-5">
-                  <div>
+                <div className="flex min-w-0 flex-col gap-4 p-4 sm:gap-5 sm:p-5">
+                  <div className="min-w-0">
                     <SmartEyebrow>
                       {restaurant.cuisine} · {restaurant.city}
                     </SmartEyebrow>
-                    <h3 className="mt-3 font-display text-4xl font-medium leading-none text-[var(--theme-ink)]">
+                    <h3 className="mt-3 text-balance font-display text-3xl font-medium leading-none text-[var(--theme-ink)] sm:text-4xl">
                       {restaurant.name}
                     </h3>
                     <p className="mt-3 line-clamp-4 text-sm leading-6 text-[var(--muted)]">

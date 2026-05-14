@@ -76,12 +76,12 @@ function PhotoCard({
   return (
     <article
       className={cn(
-        "group flex cursor-pointer flex-col gap-4 transition-opacity hover:opacity-95",
+        "group flex min-w-0 cursor-pointer flex-col gap-3 transition-opacity hover:opacity-95 sm:gap-4",
         !item.isAvailable && "opacity-55",
       )}
       onClick={() => onSelectItem(item)}
     >
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-[var(--paper-warm)]">
+      <div className="relative aspect-[5/4] overflow-hidden rounded-[4px] bg-[var(--paper-warm)] sm:aspect-[4/5]">
         {item.imageUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -104,15 +104,15 @@ function PhotoCard({
       </div>
 
       <div className="flex flex-col gap-1 px-0.5">
-        <div className="flex items-baseline gap-3">
-          <h3 className="min-w-0 flex-1 text-balance font-display text-2xl font-medium leading-tight text-[var(--ink)]">
+        <div className="flex min-w-0 items-baseline gap-3">
+          <h3 className="min-w-0 flex-1 text-balance font-display text-xl font-medium leading-tight text-[var(--ink)] sm:text-2xl">
             {localizedName(item, locale)}
           </h3>
           <SmartPrice>
             {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
           </SmartPrice>
         </div>
-        <p className="line-clamp-2 font-display text-base italic leading-snug text-[var(--ink-soft)]">
+        <p className="line-clamp-2 font-display text-[15px] italic leading-snug text-[var(--ink-soft)] sm:text-base">
           {localizedDescription(item, locale)}
         </p>
         <p className="line-clamp-1 text-xs leading-5 text-[var(--muted)]">
@@ -146,11 +146,11 @@ export function PhotoMenuView({
   const copy = getGuestCopy(locale);
 
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-20">
+    <div className="mx-auto flex max-w-5xl flex-col gap-14 sm:gap-20">
       {categories.map((category) => (
         <section key={category.id} id={category.id} className="scroll-mt-24">
-          <header className="mb-8 flex items-baseline gap-5">
-            <h2 className="whitespace-nowrap font-display text-4xl font-medium leading-none text-[var(--ink)]">
+          <header className="mb-6 flex items-baseline gap-4 sm:mb-8 sm:gap-5">
+            <h2 className="min-w-0 text-balance font-display text-3xl font-medium leading-none text-[var(--ink)] sm:text-4xl">
               {localizedCategoryName(category, locale)}
             </h2>
             <SmartHairline />
@@ -158,7 +158,7 @@ export function PhotoMenuView({
               {String(category.items.length).padStart(2, "0")}
             </SmartEyebrow>
           </header>
-          <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 sm:gap-y-14 xl:grid-cols-3">
             {category.items.map((item) => (
               <PhotoCard
                 key={item.id}

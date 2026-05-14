@@ -74,7 +74,7 @@ export default async function QrPage({
         statusLabel="Attribution ready"
       />
 
-      <div className="grid gap-4 lg:grid-cols-[360px_1fr]">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]">
         <Card>
           <CardHeader className="border-b border-[var(--hairline-soft)] bg-[var(--paper-warm)]">
             <QrCode className="text-[var(--secondary)]" />
@@ -83,7 +83,7 @@ export default async function QrPage({
           </CardHeader>
           <CardContent className="flex flex-col gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={qrDataUrl} alt="QR code for the public menu" className="rounded-[var(--radius-md)] border border-[var(--hairline)]" />
+            <img src={qrDataUrl} alt="QR code for the public menu" className="mx-auto w-full max-w-72 rounded-[var(--radius-md)] border border-[var(--hairline)] sm:max-w-none" />
             <Badge variant="outline" className="w-fit">
               {data.restaurant.slug}
             </Badge>

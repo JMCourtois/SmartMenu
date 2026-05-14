@@ -30,9 +30,9 @@ export function ManagerStatusCard({
   return (
     <article className="rounded-[var(--radius-lg)] bg-white p-4 shadow-[var(--shadow-rest),var(--ring-hairline)]">
       <div className="flex items-start justify-between gap-3">
-        <div>
+        <div className="min-w-0">
           <SmartEyebrow className="text-[var(--muted)]">{label}</SmartEyebrow>
-          <p className="mt-3 font-display text-4xl font-semibold leading-none text-[var(--ink)]">{value}</p>
+          <p className="mt-3 break-words font-display text-3xl font-semibold leading-none text-[var(--ink)] sm:text-4xl">{value}</p>
         </div>
         <span className={cn("flex size-10 items-center justify-center rounded-[var(--radius-md)]", toneClass[tone])}>
           <Icon className="size-5" />

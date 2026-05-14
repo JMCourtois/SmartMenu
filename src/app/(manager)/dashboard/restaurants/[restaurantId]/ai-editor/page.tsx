@@ -117,7 +117,7 @@ export default async function AiEditorPage({
         />
       </section>
 
-      <div className="grid gap-4 xl:grid-cols-[1fr_340px]">
+      <div className="grid min-w-0 gap-4 xl:grid-cols-[minmax(0,1fr)_340px]">
         <Card>
           <CardHeader>
             <CardTitle>Generate proposal</CardTitle>
@@ -126,7 +126,7 @@ export default async function AiEditorPage({
               clarify, promote, and detect missing safety data.
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <CardContent className="grid min-w-0 gap-4 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="grid gap-3">
               {[
                 "Translate top dishes into English, Spanish, German, Japanese, and Korean.",
@@ -134,7 +134,7 @@ export default async function AiEditorPage({
                 "Find dishes missing allergen or dietary verification notes.",
                 "Suggest pairings and promoted vegetarian dishes for tonight.",
               ].map((prompt) => (
-                <div key={prompt} className="rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
+                  <div key={prompt} className="min-w-0 rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
                   <div className="mb-2 flex items-center gap-2 text-sm font-semibold">
                     <WandSparkles className="size-4 text-[var(--secondary)]" />
                     Prompt shortcut
@@ -201,7 +201,7 @@ export default async function AiEditorPage({
           <Card key={changeSet.id} className="overflow-hidden">
             <CardHeader className="border-b border-[var(--hairline-soft)] bg-[var(--paper-warm)]">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
-                <div>
+                <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
                     <CardTitle>{changeSet.summary ?? "AI proposal"}</CardTitle>
                     <Badge variant={riskVariant(changeSet.riskLevel)}>
@@ -261,18 +261,18 @@ export default async function AiEditorPage({
 
               <div className="grid gap-3">
                 {changeSet.changes.map((change) => (
-                  <div key={change.id} className="rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
+                  <div key={change.id} className="min-w-0 rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="outline">{change.entityType}</Badge>
                       <Badge variant="secondary">{change.operation}</Badge>
                       {change.field ? <Badge variant="outline">{change.field}</Badge> : null}
                     </div>
                     <p className="mt-2 text-sm text-muted-foreground">{change.reason}</p>
-                    <div className="mt-3 grid gap-3 md:grid-cols-2">
-                      <pre className="max-h-60 overflow-auto rounded-[var(--radius-sm)] bg-white p-3 text-xs shadow-[var(--ring-hairline)]">
+                    <div className="mt-3 grid min-w-0 gap-3 md:grid-cols-2">
+                      <pre className="max-h-60 max-w-full overflow-auto rounded-[var(--radius-sm)] bg-white p-3 text-xs shadow-[var(--ring-hairline)]">
                         {renderValue(change.oldValue)}
                       </pre>
-                      <pre className="max-h-60 overflow-auto rounded-[var(--radius-sm)] bg-[var(--accent-soft)] p-3 text-xs shadow-[var(--ring-hairline)]">
+                      <pre className="max-h-60 max-w-full overflow-auto rounded-[var(--radius-sm)] bg-[var(--accent-soft)] p-3 text-xs shadow-[var(--ring-hairline)]">
                         {renderValue(change.newValue)}
                       </pre>
                     </div>

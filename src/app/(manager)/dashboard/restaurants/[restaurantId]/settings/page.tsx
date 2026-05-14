@@ -42,7 +42,7 @@ export default async function SettingsPage({
         statusLabel="Read-only MVP"
       />
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-3">
         <Card>
           <CardHeader className="border-b border-[var(--hairline-soft)] bg-[var(--paper-warm)]">
             <Globe2 className="text-[var(--accent-dark)]" />

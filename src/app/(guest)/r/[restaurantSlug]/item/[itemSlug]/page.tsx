@@ -49,17 +49,17 @@ export default async function GuestMenuItemPage({
       className="min-h-screen bg-[var(--paper-light)] text-[var(--ink)]"
       style={themeStyle}
     >
-      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4">
+      <div className="mx-auto flex max-w-5xl flex-col gap-5 px-4 py-5 sm:gap-6 sm:px-6 sm:py-6 lg:px-8">
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <SmartMenuLogo sublabel={menu.restaurant.name} />
-          <Button variant="ghost" render={<Link href={`/r/${restaurantSlug}`} />}>
+          <Button className="w-full sm:w-auto" variant="ghost" render={<Link href={`/r/${restaurantSlug}`} />}>
             <ArrowLeft data-icon="inline-start" />
             {copy.openMenu}
           </Button>
         </div>
 
-        <article className="overflow-hidden rounded-[28px] bg-[var(--paper)] shadow-[var(--shadow-overlay)]">
-          <div className="relative min-h-[420px]">
+        <article className="overflow-hidden rounded-[var(--radius-lg)] bg-[var(--paper)] shadow-[var(--shadow-overlay)] sm:rounded-[28px]">
+          <div className="relative min-h-[320px] sm:min-h-[420px]">
             <DemoAwareMenuItemImage
               restaurantSlug={menu.restaurant.slug}
               itemId={item.id}
@@ -71,14 +71,14 @@ export default async function GuestMenuItemPage({
               className="absolute inset-0"
               style={{ background: "var(--scrim-bottom)" }}
             />
-            <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
+            <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-8">
               <SmartEyebrow className="text-white/75">
                 {menu.restaurant.name}
               </SmartEyebrow>
-              <h1 className="mt-3 max-w-3xl font-display text-5xl font-semibold leading-none sm:text-6xl">
+              <h1 className="mt-3 max-w-3xl text-balance font-display text-4xl font-semibold leading-none sm:text-6xl">
                 {localizedName(item, locale)}
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-white/90">
+              <p className="mt-3 line-clamp-3 max-w-2xl text-sm leading-6 text-white/90 sm:mt-4 sm:line-clamp-none sm:text-base sm:leading-7">
                 {localizedDescription(item, locale)}
               </p>
               <span className="mt-5 inline-flex rounded-full bg-white/95 px-4 py-2 text-[var(--ink)]">
@@ -89,8 +89,8 @@ export default async function GuestMenuItemPage({
             </div>
           </div>
 
-          <div className="grid gap-4 p-5 sm:p-7 md:grid-cols-2">
-            <SmartSurface className="p-5 md:col-span-2">
+          <div className="grid gap-4 p-4 sm:p-7 md:grid-cols-2">
+            <SmartSurface className="p-4 sm:p-5 md:col-span-2">
               <div className="mb-3 flex items-center gap-2 font-semibold">
                 <Info className="size-4 text-[var(--accent-dark)]" />
                 {copy.explanation}
@@ -98,7 +98,7 @@ export default async function GuestMenuItemPage({
               <p className="text-sm leading-6 text-[var(--muted)]">
                 {localizedItemField(item, locale, "explanation")}
               </p>
-              <div className="mt-5 grid gap-4 md:grid-cols-3">
+              <div className="mt-5 grid gap-4 sm:grid-cols-3">
                 <div>
                   <SmartEyebrow className="mb-2 text-[var(--muted)]">
                     <Soup className="mr-1 inline size-3.5" />
@@ -125,7 +125,7 @@ export default async function GuestMenuItemPage({
               </div>
             </SmartSurface>
 
-            <SmartSurface className="p-5">
+            <SmartSurface className="p-4 sm:p-5">
               <div className="mb-3 flex items-center gap-2 font-semibold">
                 <Utensils className="size-4 text-[var(--secondary)]" />
                 {copy.ingredients}
@@ -145,7 +145,7 @@ export default async function GuestMenuItemPage({
               </p>
             </SmartSurface>
 
-            <SmartSurface className="p-5">
+            <SmartSurface className="p-4 sm:p-5">
               <div className="mb-3 flex items-center gap-2 font-semibold">
                 <BadgeCheck className="size-4 text-[var(--accent-dark)]" />
                 {copy.dietary}
@@ -161,7 +161,7 @@ export default async function GuestMenuItemPage({
               </div>
             </SmartSurface>
 
-            <section className="rounded-[var(--radius-lg)] bg-[var(--danger-soft)] p-5 shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--danger)_18%,transparent)]">
+            <section className="rounded-[var(--radius-lg)] bg-[var(--danger-soft)] p-4 shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--danger)_18%,transparent)] sm:p-5">
               <div className="mb-3 flex items-center gap-2 font-semibold text-[var(--danger)]">
                 <ShieldAlert className="size-4" />
                 {copy.allergens}
@@ -169,7 +169,7 @@ export default async function GuestMenuItemPage({
               <div className="flex flex-col gap-2">
                 {item.allergens.map((allergen) => (
                   <div key={allergen.code} className="rounded-[var(--radius-sm)] bg-white p-3 text-sm">
-                    <div className="flex items-center justify-between gap-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <span className="font-medium">{localizedAllergenName(allergen, locale)}</span>
                       <span className="font-price text-[10px] uppercase text-[var(--muted)]">
                         {allergen.status.replaceAll("_", " ")}

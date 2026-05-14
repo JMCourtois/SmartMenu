@@ -142,18 +142,18 @@ export default async function MenuManagerPage({
         />
       </section>
 
-      <div className="grid gap-4 xl:grid-cols-[1fr_360px]">
-        <section className="flex flex-col gap-4">
+      <div className="grid min-w-0 gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
+        <section className="flex min-w-0 flex-col gap-4">
           {data.draftVersion.categories.map((category) => (
             <Card key={category.id} className="overflow-hidden">
               <CardHeader className="border-b border-[var(--hairline-soft)] bg-[var(--paper-warm)]">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <CardTitle className="flex items-center gap-2">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
+                    <CardTitle className="flex min-w-0 items-center gap-2">
                       <span className="flex size-8 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--accent-dark)] font-price text-sm text-white">
                         {category.sortOrder}
                       </span>
-                      {category.name}
+                      <span className="min-w-0 truncate">{category.name}</span>
                     </CardTitle>
                     <CardDescription>
                       {category.items.length} draft items · shown on the public QR menu after publish
@@ -164,7 +164,7 @@ export default async function MenuManagerPage({
               </CardHeader>
               <CardContent className="flex flex-col gap-3">
                 {category.items.map((item) => (
-                  <div key={item.id} className="rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
+                  <div key={item.id} className="min-w-0 rounded-[var(--radius-md)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)]">
                     <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                       <div className="flex min-w-0 flex-1 flex-col gap-3 sm:flex-row">
                         <DemoAwareMenuItemImage
@@ -206,7 +206,7 @@ export default async function MenuManagerPage({
                           </div>
                         </div>
                       </div>
-                      <div className="flex shrink-0 items-center gap-2 lg:flex-col lg:items-end">
+                      <div className="flex shrink-0 flex-wrap items-center gap-2 lg:flex-col lg:items-end">
                         <div className="font-price text-sm font-semibold">
                           {formatPrice(item.priceCents, data.restaurant.currency)}
                         </div>
@@ -224,7 +224,7 @@ export default async function MenuManagerPage({
                       itemName={item.name}
                       demoMode={isDemo}
                     />
-                    <form action={upsertTranslation} className="mt-3 grid gap-2 rounded-[var(--radius-md)] bg-white p-2 shadow-[var(--ring-hairline)] md:grid-cols-[120px_1fr_1.5fr_auto]">
+                    <form action={upsertTranslation} className="mt-3 grid min-w-0 gap-2 rounded-[var(--radius-md)] bg-white p-2 shadow-[var(--ring-hairline)] md:grid-cols-[120px_minmax(0,1fr)_minmax(0,1.5fr)_auto]">
                       <input type="hidden" name="menuItemId" value={item.id} />
                       <Input name="locale" defaultValue="en" aria-label="Locale" disabled={isDemo} />
                       <Input
@@ -250,7 +250,7 @@ export default async function MenuManagerPage({
           ))}
         </section>
 
-        <aside className="flex flex-col gap-4">
+        <aside className="min-w-0 flex flex-col gap-4">
           <SetupChecklist
             items={[
               {
@@ -382,7 +382,7 @@ export default async function MenuManagerPage({
                 <form
                   key={version.id}
                   action={restoreVersion}
-                  className="flex items-center justify-between gap-3 rounded-lg border p-3"
+                  className="flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <input type="hidden" name="menuVersionId" value={version.id} />
                   <div>

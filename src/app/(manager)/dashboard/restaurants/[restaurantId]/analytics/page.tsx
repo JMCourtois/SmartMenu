@@ -84,7 +84,7 @@ export default async function AnalyticsPage({
         />
       </section>
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-3">
         <Card>
           <CardHeader>
             <Languages className="text-[var(--accent-dark)]" />
@@ -96,8 +96,8 @@ export default async function AnalyticsPage({
               const option = getLocaleOption(language.locale);
               return (
                 <div key={language.locale} className="grid gap-1">
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline" className="gap-2">
+                  <div className="flex min-w-0 items-center justify-between gap-2">
+                    <Badge variant="outline" className="min-w-0 gap-2">
                       <span>{option.flag}</span>
                       {option.nativeLabel}
                     </Badge>
@@ -149,7 +149,7 @@ export default async function AnalyticsPage({
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
             {summary.topFilters.map((filter) => (
-              <div key={filter.filter} className="flex items-center justify-between">
+              <div key={filter.filter} className="flex min-w-0 items-center justify-between gap-2">
                 <Badge variant="secondary">{filter.filter}</Badge>
                 <span className="font-mono text-sm">{filter.count}</span>
               </div>

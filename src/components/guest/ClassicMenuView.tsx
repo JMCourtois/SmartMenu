@@ -78,7 +78,7 @@ function ClassicMenuRow({
   return (
     <article
       className={cn(
-        "cursor-pointer py-6 transition-opacity hover:opacity-95",
+        "min-w-0 cursor-pointer py-5 transition-opacity hover:opacity-95 sm:py-6",
         !last && "border-b border-[var(--hairline-soft)]",
         !item.isAvailable && "opacity-55",
       )}
@@ -90,17 +90,17 @@ function ClassicMenuRow({
         </SmartEyebrow>
       ) : null}
 
-      <div className="flex items-baseline gap-0">
-        <h3 className="text-balance font-display text-2xl font-medium leading-tight text-[var(--ink)]">
+      <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-0">
+        <h3 className="min-w-0 text-balance font-display text-xl font-medium leading-tight text-[var(--ink)] sm:text-2xl">
           {localizedName(item, locale)}
         </h3>
-        <DotLeader />
+        <DotLeader className="hidden sm:block" />
         <SmartPrice size="lg">
           {formatLocalizedPrice(item.priceCents, menu.restaurant.currency, locale)}
         </SmartPrice>
       </div>
 
-      <p className="mt-2 max-w-2xl font-display text-base italic leading-relaxed text-[var(--ink-soft)]">
+        <p className="mt-2 max-w-2xl font-display text-[15px] italic leading-relaxed text-[var(--ink-soft)] sm:text-base">
         {localizedDescription(item, locale)}
       </p>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--muted)]">
@@ -148,10 +148,10 @@ export function ClassicMenuView({
         <section
           key={category.id}
           id={category.id}
-          className={cn("scroll-mt-24", categoryIndex > 0 && "mt-16")}
+          className={cn("scroll-mt-24", categoryIndex > 0 && "mt-12 sm:mt-16")}
         >
-          <header className="mb-6 flex items-baseline gap-5">
-            <h2 className="whitespace-nowrap font-display text-3xl font-medium leading-none text-[var(--ink)]">
+          <header className="mb-5 flex items-baseline gap-4 sm:mb-6 sm:gap-5">
+            <h2 className="min-w-0 text-balance font-display text-3xl font-medium leading-none text-[var(--ink)] sm:whitespace-nowrap">
               {localizedCategoryName(category, locale)}
             </h2>
             <SmartHairline />

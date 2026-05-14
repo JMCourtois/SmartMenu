@@ -54,12 +54,12 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-[var(--paper)] text-[var(--ink)]" data-theme="hofbrau">
-      <div className="mx-auto grid min-h-screen max-w-[1380px] gap-6 p-4 lg:grid-cols-[260px_1fr] lg:p-6">
-        <aside className="flex flex-col gap-4 rounded-[var(--radius-xl)] bg-[var(--paper-warm)] p-4 shadow-[var(--ring-hairline)] lg:sticky lg:top-6 lg:max-h-[calc(100vh-48px)] lg:self-start lg:overflow-y-auto">
+      <div className="mx-auto grid min-h-screen max-w-[1380px] gap-4 p-3 sm:p-4 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-6 lg:p-6">
+        <aside className="min-w-0 rounded-[var(--radius-lg)] bg-[var(--paper-warm)] p-3 shadow-[var(--ring-hairline)] sm:p-4 lg:sticky lg:top-6 lg:max-h-[calc(100vh-48px)] lg:self-start lg:overflow-y-auto">
           <Link href="/dashboard" className="no-underline">
             <SmartMenuLogo sublabel="Manager" />
           </Link>
-          <div className="rounded-[var(--radius-md)] bg-white p-4 shadow-[var(--ring-hairline)]">
+          <div className="mt-3 rounded-[var(--radius-md)] bg-white p-3 shadow-[var(--ring-hairline)] sm:p-4 lg:mt-4">
             <SmartEyebrow className="text-[var(--muted)]">Restaurant</SmartEyebrow>
             <p className="mt-2 truncate text-sm font-semibold">
               {firstRestaurant?.name ?? "No restaurants"}
@@ -70,7 +70,9 @@ export default async function DashboardLayout({
               Review draft changes before publishing the public QR menu.
             </div>
           </div>
-          <ManagerNav items={nav} />
+          <div className="mt-3 overflow-x-auto lg:mt-4 lg:overflow-visible">
+            <ManagerNav items={nav} />
+          </div>
         </aside>
         <div className="min-w-0">{children}</div>
       </div>

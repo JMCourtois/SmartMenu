@@ -313,7 +313,7 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
       style={themeStyle}
     >
       <section className="bg-[var(--paper-light)]">
-        <div className="mx-auto max-w-7xl px-4 pb-12 pt-6 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-7xl px-4 pb-8 pt-5 sm:px-6 sm:pb-12 sm:pt-6 lg:px-10">
           <div className="flex items-center justify-between gap-4">
             <SmartMenuLogo
               sublabel={tableCode ? `Table ${tableCode}` : "QR menu"}
@@ -351,14 +351,14 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
             </DropdownMenu>
           </div>
 
-          <div className="mx-auto mt-16 max-w-3xl pb-4 text-center sm:mt-20">
+          <div className="mx-auto mt-10 max-w-3xl pb-3 text-center sm:mt-20 sm:pb-4">
             <SmartEyebrow>
               {restaurantCuisine} · {displayMenu.restaurant.city}
             </SmartEyebrow>
-            <h1 className="mt-5 text-balance font-display text-[clamp(3.5rem,9vw,5.5rem)] font-medium leading-none text-[var(--theme-ink)]">
+            <h1 className="mt-4 text-balance font-display text-[clamp(3rem,17vw,4.75rem)] font-medium leading-none text-[var(--theme-ink)] sm:mt-5 sm:text-[clamp(3.5rem,9vw,5.5rem)]">
               {displayMenu.restaurant.name}
             </h1>
-            <p className="mx-auto mt-4 max-w-2xl font-display text-xl italic leading-snug text-[var(--ink-soft)] sm:text-2xl">
+            <p className="mx-auto mt-3 max-w-2xl font-display text-lg italic leading-snug text-[var(--ink-soft)] sm:mt-4 sm:text-2xl">
               {restaurantDescription}
             </p>
           </div>
@@ -366,8 +366,8 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
       </section>
 
       <div className="sticky top-0 z-30 border-y border-[var(--hairline-soft)] bg-[color-mix(in_srgb,var(--paper-light)_88%,white)] backdrop-blur-xl">
-        <div className="mx-auto flex min-h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-10">
-          <div className="min-w-0 flex-1">
+        <div className="mx-auto flex min-h-16 max-w-7xl flex-wrap items-center gap-x-3 gap-y-0 px-3 sm:flex-nowrap sm:gap-4 sm:px-6 lg:px-10">
+          <div className="min-w-0 flex-1 basis-full sm:basis-auto">
             {barMode === "search" ? (
               <SearchRow
                 query={query}
@@ -396,7 +396,7 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
             )}
           </div>
 
-          <div className="flex shrink-0 items-center gap-1">
+          <div className="ml-auto flex shrink-0 items-center gap-1 py-2 sm:ml-0 sm:py-0">
             <ToolIcon
               label={copy.searchPlaceholder}
               active={barMode === "search"}
@@ -451,8 +451,8 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
         ) : null}
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_320px] lg:px-10">
-        <div>
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-10 lg:px-10">
+        <div className="min-w-0">
           {viewMode === "photo" ? (
             <PhotoMenuView
               categories={filteredCategories}
@@ -476,11 +476,11 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
 
         <aside className="flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start">
           <SmartSurface className="p-5" as="aside">
-            <div className="flex items-start gap-3">
+            <div className="flex min-w-0 items-start gap-3">
               <span className="grid size-9 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-[var(--accent-soft)] text-[var(--accent-dark)]">
                 <Sparkles className="size-4" />
               </span>
-              <div>
+              <div className="min-w-0">
                 <SmartEyebrow className="text-[var(--muted)]">
                   {copy.recommendedNow}
                 </SmartEyebrow>
@@ -521,11 +521,11 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
           </SmartSurface>
 
           <SmartSurface className="p-5" as="aside">
-            <div className="flex items-start gap-3">
+            <div className="flex min-w-0 items-start gap-3">
               <span className="grid size-9 shrink-0 place-items-center rounded-[var(--radius-sm)] bg-[var(--danger-soft)] text-[var(--danger)]">
                 <ShieldAlert className="size-4" />
               </span>
-              <div>
+              <div className="min-w-0">
                 <SmartEyebrow className="text-[var(--muted)]">
                   {copy.allergens}
                 </SmartEyebrow>
@@ -575,7 +575,7 @@ function CategoryNav({
   }
 
   return (
-    <nav className="flex items-center gap-7 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <nav className="flex items-center gap-5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-7 [&::-webkit-scrollbar]:hidden">
       {categories.map((category) => {
         const active = activeCategory === category.id;
 
@@ -584,7 +584,7 @@ function CategoryNav({
             key={category.id}
             href={`#${category.id}`}
             className={cn(
-              "smart-eyebrow relative inline-flex shrink-0 py-6 text-[var(--muted)] no-underline transition hover:text-[var(--ink)]",
+              "smart-eyebrow relative inline-flex shrink-0 py-4 text-[var(--muted)] no-underline transition hover:text-[var(--ink)] sm:py-6",
               active && "text-[var(--ink)]",
             )}
             onClick={(event) => {
@@ -629,13 +629,13 @@ function SearchRow({
   }
 
   return (
-    <form onSubmit={submit} className="flex min-h-16 items-center gap-3">
+    <form onSubmit={submit} className="flex min-h-16 min-w-0 items-center gap-2 sm:gap-3">
       <Search className="size-4 shrink-0 text-[var(--muted)]" />
       <input
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder={placeholder}
-        className="h-16 min-w-0 flex-1 bg-transparent text-[15px] text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
+        className="h-14 min-w-0 flex-1 bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)] sm:h-16 sm:text-[15px]"
       />
       {query ? (
         <button
@@ -648,7 +648,7 @@ function SearchRow({
       ) : null}
       <Button type="submit" size="sm" disabled={!query.trim()}>
         <Sparkles data-icon="inline-start" />
-        {askLabel}
+        <span className="hidden sm:inline">{askLabel}</span>
       </Button>
       <button
         type="button"
@@ -748,7 +748,7 @@ function FilterPanel({
 }) {
   return (
     <div className="border-t border-[var(--hairline-soft)] bg-[color-mix(in_srgb,var(--paper)_90%,white)]">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-5 sm:px-6 lg:px-10">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-2 px-4 py-4 sm:gap-3 sm:px-6 sm:py-5 lg:px-10">
         <SmartEyebrow className="text-[var(--muted)]">{copy.quickFilters}</SmartEyebrow>
         {quickIntents.map((quickIntent) => {
           const value = quickIntent.value;
@@ -772,7 +772,7 @@ function FilterPanel({
         {activeIntent ? (
           <button
             type="button"
-            className="ml-auto rounded-full px-3 py-1.5 text-xs text-[var(--muted)] hover:bg-white"
+            className="rounded-full px-3 py-1.5 text-xs text-[var(--muted)] hover:bg-white sm:ml-auto"
             onClick={onReset}
           >
             Reset
@@ -817,7 +817,7 @@ function MorePanel({
 
   return (
     <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-      <div className="absolute right-4 top-2 z-40 w-72 rounded-[var(--radius-lg)] bg-white p-2 shadow-[var(--shadow-overlay),var(--ring-hairline)] sm:right-6 lg:right-10">
+      <div className="fixed inset-x-4 top-[9.5rem] z-40 rounded-[var(--radius-lg)] bg-white p-2 shadow-[var(--shadow-overlay),var(--ring-hairline)] sm:absolute sm:inset-x-auto sm:right-6 sm:top-2 sm:w-72 lg:right-10">
         {items.map((item) => {
           const Icon = item.icon;
           return (

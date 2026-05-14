@@ -299,11 +299,11 @@ export function AiConciergeWidget({
 
   return (
     <>
-      <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
+      <div className="fixed right-4 bottom-4 z-40 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:right-5 sm:bottom-5">
         <Button
           size="lg"
           className={cn(
-            "h-12 rounded-full px-5 text-base shadow-[var(--shadow-overlay),0_0_0_4px_rgba(255,255,255,.85)]",
+            "h-11 max-w-full rounded-full px-4 text-sm shadow-[var(--shadow-overlay),0_0_0_4px_rgba(255,255,255,.85)] sm:h-12 sm:px-5 sm:text-base",
             !hasOpenedBefore && "animate-pulse",
           )}
           style={{ backgroundColor: "var(--menu-accent-dark)", color: "white" }}
@@ -315,17 +315,17 @@ export function AiConciergeWidget({
       </div>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent className="w-full gap-0 border-l-0 bg-[var(--paper)] shadow-[var(--shadow-overlay)] sm:max-w-[440px]">
-          <SheetHeader className="border-b border-[var(--hairline-soft)] px-6 py-5 pr-12">
+        <SheetContent className="h-[100dvh] w-full max-w-full gap-0 border-l-0 bg-[var(--paper)] shadow-[var(--shadow-overlay)] sm:max-w-[440px]">
+          <SheetHeader className="border-b border-[var(--hairline-soft)] px-4 py-4 pr-12 sm:px-6 sm:py-5">
             <SmartEyebrow>{copy.ai.oneClickDemos}</SmartEyebrow>
-            <SheetTitle className="mt-2 flex items-center gap-2 font-display text-3xl font-semibold leading-tight">
+            <SheetTitle className="mt-2 flex items-center gap-2 font-display text-2xl font-semibold leading-tight sm:text-3xl">
               <Sparkles style={{ color: "var(--menu-secondary)" }} />
               {copy.ai.title}
             </SheetTitle>
             <SheetDescription className="leading-6">{copy.ai.subtitle}</SheetDescription>
           </SheetHeader>
 
-          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-5 py-5">
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-4 sm:px-5 sm:py-5">
             <section className="surface-card rounded-[var(--radius-lg)] p-3">
               <div className="mb-2 flex items-center justify-between gap-3">
                 <div className="text-sm font-semibold">{copy.ai.oneClickDemos}</div>
@@ -398,12 +398,13 @@ export function AiConciergeWidget({
                       );
                     })}
                   </div>
-                  <div className="mt-3 grid grid-cols-3 gap-2">
+                  <div className="mt-3 grid gap-2 sm:grid-cols-3">
                     {(["mild", "medium", "hot"] as const).map((level) => (
                       <Button
                         key={level}
                         variant={preferences.spiceTolerance === level ? "secondary" : "outline"}
                         size="sm"
+                        className="whitespace-normal"
                         onClick={() =>
                           setPreferences((current) => ({ ...current, spiceTolerance: level }))
                         }
@@ -416,12 +417,13 @@ export function AiConciergeWidget({
                       </Button>
                     ))}
                   </div>
-                  <div className="mt-2 grid grid-cols-3 gap-2">
+                  <div className="mt-2 grid gap-2 sm:grid-cols-3">
                     {(["any", "under-20", "splurge"] as const).map((budget) => (
                       <Button
                         key={budget}
                         variant={preferences.budget === budget ? "secondary" : "outline"}
                         size="sm"
+                        className="whitespace-normal"
                         onClick={() => setPreferences((current) => ({ ...current, budget }))}
                       >
                         {budget === "any"
@@ -589,7 +591,7 @@ export function AiConciergeWidget({
           </div>
 
           <form
-            className="border-t border-[var(--hairline-soft)] bg-[var(--paper)] p-4"
+            className="border-t border-[var(--hairline-soft)] bg-[var(--paper)] p-3 sm:p-4"
             onSubmit={(event) => {
               event.preventDefault();
               void askConcierge(input);
