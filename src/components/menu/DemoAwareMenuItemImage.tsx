@@ -7,6 +7,7 @@ import {
   getDemoMenuItemImageOverride,
   subscribeDemoImageOverrides,
 } from "@/lib/demo-image-overrides";
+import { withBasePath } from "@/lib/base-path";
 import { cn } from "@/lib/utils";
 
 type UseDemoMenuItemImageUrlInput = {
@@ -95,7 +96,7 @@ export function DemoAwareMenuItemImage({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={imageUrl}
+      src={withBasePath(imageUrl)}
       alt={itemName}
       className={cn("object-cover", imageClassName, className)}
     />

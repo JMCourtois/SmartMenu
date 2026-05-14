@@ -53,6 +53,7 @@ import {
   getDemoMenuImageOverrides,
   subscribeDemoImageOverrides,
 } from "@/lib/demo-image-overrides";
+import { withBasePath } from "@/lib/base-path";
 import { readGuestPreferences, writeGuestPreferences } from "@/lib/guest-preferences";
 import { cn } from "@/lib/utils";
 import type { MenuDisplayMode, MenuItemView, RestaurantMenuView } from "@/types/menu";
@@ -213,7 +214,7 @@ export function GuestMenuClient({ menu, source, tableCode, initialView }: Props)
 
   async function track(eventType: string, metadata?: Record<string, unknown>) {
     const sessionIdHash = await getSessionIdHash();
-    void fetch("/api/track-event", {
+    void fetch(withBasePath("/api/track-event"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

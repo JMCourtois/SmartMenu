@@ -17,6 +17,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { SmartEyebrow, SmartPrice } from "@/components/smartmenu/primitives";
 import { ConciergeResponseSchema, type ConciergeResponse } from "@/lib/ai/concierge";
+import { withBasePath } from "@/lib/base-path";
 import {
   clearConversation,
   detectChatLanguage,
@@ -214,7 +215,7 @@ export function AiConciergeWidget({
     });
 
     try {
-      const response = await fetch("/api/ai/concierge", {
+      const response = await fetch(withBasePath("/api/ai/concierge"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
